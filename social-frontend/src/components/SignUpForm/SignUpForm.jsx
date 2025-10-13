@@ -5,6 +5,7 @@ import './SignUpForm.css'
 export default function SignUpForm() {
     const [name, setName] = useState('');
     const [username, setUserName] = useState('');
+    const [birthday, setBirthday] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     //get from backend
@@ -73,6 +74,16 @@ export default function SignUpForm() {
                     required
                 />
                 {/* AGE */}
+                <label htmlFor="name">Birthday:</label>
+                <input 
+                    type='date'
+                    id='birthday' 
+                    name='birthday'
+                    placeholder="Your email (aaa@aaa.com)"
+                    value={birthday}
+                    onChange={(e) => setBirthday(e.target.value)}
+                    required
+                />
                 <label htmlFor="password">Password:</label>
                 <input 
                     type="password"
