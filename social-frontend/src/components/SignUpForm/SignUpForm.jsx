@@ -19,12 +19,12 @@ export default function SignUpForm() {
         e.preventDefault()
 
         //if validation form returns true, continue with submission
-        fetch(`http://localhost:3000/access/newuser`, { 
+        fetch(`${apiUrl}/access/newuser`, { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, username, password, confirmpassword: confirmPassword }), 
+        body: JSON.stringify({ name, username, password, birthday, confirmpassword: confirmPassword }), 
         })
         .then((response) => {
             return response.json();
