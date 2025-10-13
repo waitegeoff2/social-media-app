@@ -33,7 +33,7 @@ async(req, res, next) => {
     //display errors if any
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json(errors); //I think this returns an errors array that you can map (CHECK)
+      return res.status(400).json(errors); //returns an errors array that you can map on the frontend
     }
 
 //if valid, put values into db
@@ -41,10 +41,13 @@ async(req, res, next) => {
         console.log(req.body)
         const user = req.body;
         const name = req.body.name;
+        const birthday = req.body.birthday;
+        const dateOnly = birthday;
+        const birthdayDateTime = new Date(`${dateOnly}T00:00:00Z`);
         const username = req.body.username;
         
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        await db.addUser(name, username, hashedPassword);
+        await db.addUser(name, username, birthdayDateTime, hashedPassword);
 
         res.json(true);
     } catch(error){

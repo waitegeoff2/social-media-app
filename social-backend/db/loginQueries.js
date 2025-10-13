@@ -1,13 +1,12 @@
 const prisma = require('./prisma');
 
 //register a user
-async function addUser(fullName, userName, age, bio, password) {
+async function addUser(fullName, userName, birthday, password) {
     await prisma.user.create({
         data: {
             name: fullName,
             username: userName,
-            age: age,
-            bio: bio,
+            birthday: birthday,
             password: password
         }
     })

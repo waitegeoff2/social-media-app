@@ -20,6 +20,72 @@ model User {
   username  String   @unique
   password  String   @db.VarChar(255)
   bio   String?    @db.Text //for longer text content
-  age   Int?
+  birthday   DateTime   @db.Date
   profilepic   String? //filepath here??
+  //create posts, comments, and likes
+  //each post has a sender and a receiver (both can be same person, work with that)
+  postto Post[]   @relation("sender")
+  postfrom Post[]  @relation("receiver")
+  comments  Comment[]
+  likes   Like[]
+  //the users in this users' friends list
+  friendss  User[]   @relation("UserFriends")
+  //the users who have this user in their friends list
+  friendof User[]  @relation("UserFriends")
+  //the person sending the friend request
+  requestfrom   Request [] @relation("requestsender")
+  // the person receiving the friend request
+  requestto  Request[]  @relation("requestreceiver")
+  //NOTIFICATIONS????
 }
+
+model Post {
+  id    Int      @id @default(autoincrement())
+  content  String
+  //send a post (post on wall). Can send to own wall and be both
+  sender  User @relation("sender",fields: [senderId], references: [id])
+  senderId  Int
+  receiver  User @relation("receiver",fields: [receiverId], references: [id])
+  receiverId  Int
+  sendTime  DateTime  @default(now())
+  comments   Comment[]
+  likes   Like[]
+}
+
+model Comment {
+  id    Int      @id @default(autoincrement())
+  author    User   @relation(fields: [authorId], references: [id])
+  authorId    Int
+  post   Post    @relation(fields: [postId], references: [id])
+  postId   Int
+  likes  Like[]
+
+  createdAt  DateTime  @default(now())
+  content   String  
+}
+
+model Like {
+  id    Int      @id @default(autoincrement())
+  //person who liked
+  author    User   @relation(fields: [authorId], references: [id])
+  authorId    Int
+  //liking a post
+  postlike   Post    @relation(fields: [postId], references: [id])
+  postId   Int
+  //liking a comment
+  commentlike  Comment   @relation(fields: [commentId], references: [id])
+  commentId   Int
+  createdAt  DateTime  @default(now())
+}
+
+model Request {
+  id    Int      @id @default(autoincrement())
+  //the user who sent the friend request
+  requestfrom   User @relation("requestsender",fields: [requestfromId], references: [id])
+  requestfromId Int
+  //the user receiving the request
+  requestto User @relation("requestreceiver",fields: [requesttoId], references: [id] )
+  requesttoId Int
+}
+
+
