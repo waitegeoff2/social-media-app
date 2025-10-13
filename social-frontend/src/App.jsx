@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { Outlet } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar';
+import LoginForm from './components/LoginForm/LoginForm';
 
 
 function App() {
@@ -10,9 +11,17 @@ function App() {
 
   return (
     <>
-    {/* Login here??? top level to keep everyone out unless authenticated */}
+    {authenticated ?
+    <>
       <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} />
       <Outlet context={{ authenticated, setAuthenticated }}  />
+    </>
+    :
+    <>
+      <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} />
+      <LoginForm />
+    </>
+  }
     </>
   )
 }

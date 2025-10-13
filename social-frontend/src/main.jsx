@@ -11,9 +11,9 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
-      { index: true, element: <Navigate to="/profile" replace /> },
-      { path: '/profile', element: <Profile /> },
       
+      { path: '/profile', element: <Profile /> },
+
     ],
   },
   // {
