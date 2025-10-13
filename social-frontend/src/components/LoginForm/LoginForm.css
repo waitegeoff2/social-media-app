@@ -1,0 +1,27 @@
+.registration-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: sans-serif;
+    padding-top: 7vh;
+    
+}
+
+.form-outline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgb(201, 231, 246);
+    gap: 5px;
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
