@@ -72,6 +72,7 @@ export default function SignUpForm() {
                     onChange={(e) => setUserName(e.target.value)}
                     required
                 />
+                {/* AGE */}
                 <label htmlFor="password">Password:</label>
                 <input 
                     type="password"
