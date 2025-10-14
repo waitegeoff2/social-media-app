@@ -51,21 +51,22 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                     </form>
                 </div>
                 <div className="wall-feed">
-                    {/* { wallPosts.map((message) => (
-                                <div key={message.id} className="chat-item">
-                                { (message.senderId==selectedFriend.id) ?
-                                    <div key={message.id} className="message-in-box friend-message">
-                                        <span className="message-context"><b>{selectedFriend && selectedFriend.screenname} says:</b></span>
-                                        <div className="message-content">{message.content}</div>
-                                    </div>
-                                    :
-                                    <div key={message.id} className="message-in-box your-message">
-                                        <span className="message-context"><b>{currentUserDetails.screenname === null ? currentUserDetails.name : currentUserDetails.screenname} says:</b></span>
-                                        <div className="message-content">{message.content}</div>
-                                    </div>
-                                }
-                                </div>
-                    ))} */}
+                    { userWallPosts.map((wallPost) => (
+                        <div key={wallPost.id} className="wallpost-item">
+                        {/* check if it's a self post and adjust the display */}
+                        { (wallPost.senderId==wallPost.receiverId) ?
+                            <div key={wallPost.id} className="user-post">
+                                <span className="message-context"><b>{wallPost.sender.name} says:</b></span>
+                                <div className="message-content">{wallPost.content}</div>
+                            </div>
+                            :
+                            <div key={wallPost.id} className="message-in-box your-message">
+                                <span className="message-context"><b>{wallPost.sender.name} {' > '} {wallPost.receiver.name}:</b></span>
+                                <div className="message-content">{wallPost.content}</div>
+                            </div>
+                        }
+                        </div>
+                    ))}
                 </div>
             </div>
         </>
