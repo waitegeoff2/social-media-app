@@ -1,4 +1,5 @@
 import { useState } from "react";
+import CRUDDropDown from "../CRUDDropdown/CRUDDropdown";
 
 export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
     const [statusContent, setStatusContent] = useState('')
@@ -54,17 +55,19 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                     { userWallPosts.map((wallPost) => (
                         <div key={wallPost.id} className="wallpost-item">
                         {/* check if it's a self post and adjust the display */}
-                        { (wallPost.senderId==wallPost.receiverId) ?
-                            <div key={wallPost.id} className="user-post">
-                                <span className="message-context"><b>{wallPost.sender.name} says:</b></span>
-                                <div className="message-content">{wallPost.content}</div>
-                            </div>
-                            :
-                            <div key={wallPost.id} className="message-in-box your-message">
-                                <span className="message-context"><b>{wallPost.sender.name} {' > '} {wallPost.receiver.name}:</b></span>
-                                <div className="message-content">{wallPost.content}</div>
-                            </div>
-                        }
+                            { (wallPost.senderId==wallPost.receiverId) ?
+                                <div key={wallPost.id} className="user-post">
+                                    <span className="message-context"><b>{wallPost.sender.name} says:</b></span>
+                                    <div className="message-content">{wallPost.content}</div>
+                                </div>
+                                :
+                                <div key={wallPost.id} className="message-in-box your-message">
+                                    <span className="message-context"><b>{wallPost.sender.name} {' > '} {wallPost.receiver.name}:</b></span>
+                                    <div className="message-content">{wallPost.content}</div>
+                                </div>
+                                
+                            }
+                            < CRUDDropDown />
                         </div>
                     ))}
                 </div>
