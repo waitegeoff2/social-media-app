@@ -2,13 +2,16 @@ import { useState, useEffect, useRef } from "react"
 import "./CRUDDropDown.css"
 import { useNavigate } from "react-router-dom";
 
-export default function CRUDDropDown({ options, onSelect, placeholder, setIncomingRequests }) {
+export default function CRUDDropDown({ currentPost }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const apiUrl = import.meta.env.VITE_API_LINK;
   const navigate = useNavigate();
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  function toggleDropdown() {
+    console.log(currentPost)
+    setIsOpen(!isOpen);
+  }
 
   // Close dropdown when clicking outside
     useEffect(() => {
@@ -60,7 +63,8 @@ export default function CRUDDropDown({ options, onSelect, placeholder, setIncomi
             </div>
             {isOpen && (
                 <ul className="dropdown-menu">
-                    <li>ITEM</li>
+                    <li>EDIT POST</li>
+                    <li>DELETE POST</li>
                 </ul>
             )}
         </div>

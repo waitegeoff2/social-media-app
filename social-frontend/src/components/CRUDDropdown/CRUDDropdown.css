@@ -3,8 +3,7 @@
   display: inline-block;
 }
 
-.dropdown-toggle {
-    
+.dropdown-toggle {  
   color:black;
   padding: 10px 15px;
   font-weight: bold;
@@ -16,8 +15,7 @@
 }
 
 .dropdown-toggle:hover {
-    background-color: grey;
-
+    background-color: rgb(177, 177, 177);
 }
 
 .notifications {

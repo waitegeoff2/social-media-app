@@ -67,7 +67,8 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                                 </div>
                                 
                             }
-                            < CRUDDropDown />
+                            {/* CRUD Dropdown, pass the current post id in there so you can run functions with it. */}
+                            <CRUDDropDown currentPost={wallPost.id}/>
                         </div>
                     ))}
                 </div>
