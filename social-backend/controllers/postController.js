@@ -24,7 +24,21 @@ async function createPost(req, res, next) {
     }
 }
 
+async function deletePost(req, res, next) {
+try {
+        // const senderId = req.user.id;
+        // const receiverId = req.body.currentUser.id;
+        // const messageContent = req.body.statusContent;
+        // await db.createPost(senderId, receiverId, messageContent)
+        // res.json('Post created.')
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+}
+
 module.exports = {
     getWallPosts,
     createPost,
+    deletePost
 }

@@ -7,6 +7,10 @@ async function getWallPosts(userId) {
             where: {
                 receiverId: userId,
             },
+            include: {
+                sender: true,
+                receiver: true,
+            },
             orderBy: {
                 sendTime: 'desc',
             }
