@@ -20,4 +20,7 @@ loginRouter.post(
     // If authentication succeeds, generate token
 });
 
+//get details about current user after logging in
+loginRouter.get('/user', passport.authenticate('jwt', { session: false }), loginController.getUserDetails)
+
 module.exports = loginRouter;

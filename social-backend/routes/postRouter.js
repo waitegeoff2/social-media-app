@@ -6,6 +6,6 @@ const jwt = require('jsonwebtoken')
 const jwtSecret = process.env.JWT_SECRET; // Use a strong, environment variable for production
 
 postRouter.get('/', passport.authenticate('jwt', { session: false }), postController.getWallPosts)
-postRouter.post('/createPost', passport.authenticate('jwt', { session: false }), postController.createPost)
+postRouter.post('/createpost', passport.authenticate('jwt', { session: false }), postController.createPost)
 
 module.exports = postRouter;

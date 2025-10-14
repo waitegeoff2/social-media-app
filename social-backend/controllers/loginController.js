@@ -57,6 +57,18 @@ async(req, res, next) => {
 }
 ]
 
+async function getUserDetails(req, res, next) {
+    try {
+        const userId = req.user.id;
+        const userDetails = await db.getUserDetails(userId)
+        res.json(userDetails)
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+}
+
 module.exports = {
     addUser,
+    getUserDetails,
 }
