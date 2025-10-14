@@ -27,9 +27,9 @@ export default function LoginForm({ setAuthenticated }) {
                     setErrMessage('Invalid credentials')
                 } else {
                     setErrMessage('')
-                    setAuthenticated(true)
                     let data = response.token
                     localStorage.setItem('jwtToken', data)
+                    setAuthenticated(true)
                     // setTriggerJwt('new') ADD
                     console.log("token put into localStorage")
                 }
@@ -72,6 +72,7 @@ export default function LoginForm({ setAuthenticated }) {
                 <button className="submit-btn button-2000s" type="submit">Login</button>
             </form>
             <span>Not a member? <Link to ="/register">Register here.</Link></span>
+            <span>LOGIN AS GUEST</span>
         </div>
     </div>
     )

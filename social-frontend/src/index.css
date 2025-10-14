@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: #e8fbff;
+  background-color: #bfd9c4;
 }
 
 :root {
@@ -36,21 +36,28 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  
+  background-color: #4ea959; /* Facebook blue */
+  color: white;
+  border: none;
+  border-radius: 3px; /* Slightly rounded corners */
+  padding: 10px 15px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
   cursor: pointer;
-  transition: border-color 0.25s;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  transition: background-color 0.2s ease; /* Smooth hover effect */
 }
+
 button:hover {
-  border-color: #646cff;
+  background-color: #4c7445; /* Darker blue on hover */
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+button:active {
+  background-color: #23632a; /* Even darker blue on click */
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2); /* Inset shadow on click */
 }
 

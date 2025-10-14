@@ -14,6 +14,7 @@ export default function NavBar({ authenticated, setAuthenticated }) {
             <div className="nav-bar">
                 <div className="nav-links">
                     <div className="left-links">
+                        {/* FROG FACE IMAGE (old school facebook) */}
                         {/* links on left side of page if necessary */}
                     </div>
                     <div className="main-title">
