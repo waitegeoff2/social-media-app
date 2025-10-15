@@ -38,26 +38,31 @@ async function createPost(senderId, receiverId, messageContent) {
 }
 
 async function createLike(userId, postId) {
-        try {
+        //probably not a necessary line
+        let thisPost = postId
+    try {
         await prisma.like.create({
             data: {
               authorId: userId,
-              postId: postId,
-            },
+              postId: thisPost,
+            }
         })
     } catch (error) {
         console.error("Couldn't like post:", error);
     }
 }
 
-async function createComment(userId, postId, content) {
-        try {
-        // await prisma.like.create({
-        //     data: {
-        //       authorId: userId,
-        //       postId: postId,
-        //     }
-        // })
+async function createComment(userId, postId, content) { 
+    let thisPost = postId
+    
+    try {
+        await prisma.comment.create({
+            data: {
+              authorId: userId,
+              postId: thisPost,
+              content: content,
+            }
+        })
     } catch (error) {
         console.error("Couldn't create comment:", error);
     }

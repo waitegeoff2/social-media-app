@@ -58,7 +58,7 @@ model Comment {
   authorId    Int
   post   Post    @relation(fields: [postId], references: [id])
   postId   Int
-  likes  Like[]
+  // likes  Like[]
 
   createdAt  DateTime  @default(now())
   content   String  
@@ -73,9 +73,11 @@ model Like {
   postlike   Post    @relation(fields: [postId], references: [id])
   postId   Int
   //liking a comment
-  commentlike  Comment   @relation(fields: [commentId], references: [id])
-  commentId   Int
+  // commentlike  Comment   @relation(fields: [commentId], references: [id])
+  // commentId   Int
   createdAt  DateTime  @default(now())
+
+  @@unique([authorId, postId])
 }
 
 model Request {
@@ -86,6 +88,9 @@ model Request {
   //the user receiving the request
   requestto User @relation("requestreceiver",fields: [requesttoId], references: [id] )
   requesttoId Int
+
+  //so the request can only exist once
+  @@unique([requestfromId, requesttoId])
 }
 
 
