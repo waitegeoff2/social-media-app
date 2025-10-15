@@ -1,10 +1,18 @@
 import { useState } from "react";
 import CRUDDropDown from "../CRUDDropdown/CRUDDropdown";
 import './Wall.css'
+import Icon from '@mdi/react';
+import { mdiThumbUp } from '@mdi/js';
+import PostComments from "../PostComments/PostComments";
 
 export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
     const [statusContent, setStatusContent] = useState('')
+    const [showComments, setShowComments] = useState(false)
     const apiUrl = import.meta.env.VITE_API_LINK;
+
+    const changeComments = () => {
+        setShowComments(!showComments); // Toggles the state
+    };
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -36,11 +44,37 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
     }
 
     async function handleLike(postId) {
-        //useeffect to add like to that post
+        console.log(postId)
+
+        const token = localStorage.getItem('jwtToken');
+
+        //add message to db
+        try {
+            await fetch(`${apiUrl}/posts/createlike`, { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ postId }), 
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => { 
+                console.log(response)
+                //set local state variable for instant update. Data was saved to db too
+                // setMessages((prevMessages) => [...prevMessages, { content: messageContent }]);
+                // console.log(messageContent)
+                //setPostLikes
+            })
+        } catch(error) {
+            console.log(error)
+        }
     }
 
     async function handleComment(postId) {
-        //useeffect to add comment to that post
+        console.log(postId)
     }
 
     return (
@@ -84,12 +118,26 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                             }
                             
                             <div className="like-comment-list">
-                                { (wallPost.likes.length > 0) ?  <div>{wallPost.likes.length}<div> : <div>0</div> }
-                                <span className="like-comment">Like</span>
-                                <span className="like-comment">Comment</span>
+                                { (wallPost.likes).length > 0 ?  
+                                <div className="like-display">
+                                    {(wallPost.likes).length}
+                                    <Icon path={mdiThumbUp} size={0.8} />
+                                </div> 
+                                : 
+                                <div className="like-display">
+                                    <span>0</span>
+                                    <Icon path={mdiThumbUp} size={0.8} />
+                                </div> 
+                                }
+                                <span onClick={() => handleLike(wallPost.id)} className="like-comment">Like</span>
+                                <span onClick={changeComments} className="like-comment">Comments ({wallPost.comments.length})</span>
                                 <CRUDDropDown className='crud-dropdown' currentPost={wallPost.id}/>
                             </div>
-                            {/* <PostComments postId={wallPost.id}/> */}
+                            <div className="comments-section">
+                                    <>
+                                    <PostComments comments={wallPost.comments} handleComment={handleComment} showComments={showComments} setShowComments={setShowComments} postId={wallPost.id}/>
+                                    </>
+                            </div>
                         </div>
                     ))}
                 </div>
