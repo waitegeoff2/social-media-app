@@ -21,7 +21,6 @@ passport.use(
             username: username,
         },
         });
-        console.log(user)
         //if user not in database
         if (!user) {
             console.log('no user');
@@ -35,7 +34,6 @@ passport.use(
         }
         //if successful, return the user
         console.log('logged in!')
-        console.log(user)
       return done(null, user);
     } catch(err) {
       return done(err);

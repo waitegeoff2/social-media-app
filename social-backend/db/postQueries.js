@@ -10,6 +10,8 @@ async function getWallPosts(userId) {
             include: {
                 sender: true,
                 receiver: true,
+                comments: true,
+                likes: true,
             },
             orderBy: {
                 sendTime: 'desc',
@@ -35,7 +37,35 @@ async function createPost(senderId, receiverId, messageContent) {
     }
 }
 
+async function createLike(userId, postId) {
+        try {
+        await prisma.like.create({
+            data: {
+              authorId: userId,
+              postId: postId,
+            },
+        })
+    } catch (error) {
+        console.error("Couldn't like post:", error);
+    }
+}
+
+async function createComment(userId, postId, content) {
+        try {
+        // await prisma.like.create({
+        //     data: {
+        //       authorId: userId,
+        //       postId: postId,
+        //     }
+        // })
+    } catch (error) {
+        console.error("Couldn't create comment:", error);
+    }
+}
+
 module.exports = {
     getWallPosts,
     createPost,
+    createLike,
+    createComment,
 }
