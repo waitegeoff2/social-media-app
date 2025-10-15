@@ -33,10 +33,12 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
             })
             .then((response) => { 
                 console.log(response)
-                //set local state variable for instant update. Data was saved to db too
-                // setMessages((prevMessages) => [...prevMessages, { content: messageContent }]);
-                // console.log(messageContent)
-                const newComment = {
+                //add a temporary id to the temporary state variable
+                const newArray = [...userWallPosts]   
+                const biggestId = newArray[0].id
+                const newId = biggestId + 1            
+                const newPost = {
+                    id: newId,
                     senderId: currentUser.id,
                     receiverId: currentUser.id,
                     content: statusContent,
@@ -45,7 +47,7 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                     likes: [],
                     comments: [],
                 }
-                setUserWallPosts((prevUserWallPosts) => [newComment, ...prevUserWallPosts])
+                setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
                 setStatusContent('')
             })
         } catch(error) {
@@ -53,9 +55,8 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
         }
     }
 
-    async function handleLike(postId) {
+    async function handleLike(postId, index) {
         console.log(postId)
-
         const token = localStorage.getItem('jwtToken');
 
         //add message to db
@@ -73,10 +74,10 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
             })
             .then((response) => { 
                 console.log(response)
-                //set local state variable for instant update. Data was saved to db too
-                // setMessages((prevMessages) => [...prevMessages, { content: messageContent }]);
-                // console.log(messageContent)
-                //setPostLikes
+                //temporary state variable for instant update. Add a fake like object to this wallpost (using its index)
+                const newLikes = [...userWallPosts]
+                newLikes[index].likes.push({ author: currentUser.name, authorId: currentUser.id, postId: postId })
+                setUserWallPosts(newLikes)
             })
         } catch(error) {
             console.log(error)
@@ -107,7 +108,7 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                     </form>
                 </div>
                 <div className="wall-feed">
-                    { userWallPosts.map((wallPost) => (
+                    { userWallPosts.map((wallPost, index) => (
                         <div key={wallPost.id} className="wallpost-item">
                         {/* check if it's a self post and adjust the display */}
                             { (wallPost.senderId==wallPost.receiverId) ?
@@ -141,7 +142,7 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                                     <Icon path={mdiThumbUp} size={0.8} />
                                 </div> 
                                 }
-                                <span onClick={() => handleLike(wallPost.id)} className="like-comment">Like</span>
+                                <span onClick={() => handleLike(wallPost.id, index)} className="like-comment">Like</span>
                                 <span onClick={changeComments} className="like-comment">Comments ({wallPost.comments.length})</span>
                                 <CRUDDropDown className='crud-dropdown' currentPost={wallPost.id}/>
                             </div>
