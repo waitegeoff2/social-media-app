@@ -1,0 +1,59 @@
+.user-wall {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    padding: 20px;
+    
+}
+
+.status-input {
+    display: flex;
+}
+
+.send-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.status-textarea {
+    width: 100%;
+}
+
+.msg-send-btn {
+    align-self: flex-end;
+}
+
+.wall-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wallpost-item {
+    border-bottom: 1px solid grey;
+    padding: 15px;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.like-comment-list {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 1px;
+}
+
+.crud-dropdown {
+    margin-left: auto;
+}
+
+.like-comment {
+    font-weight: bold;
+    text-decoration: underline;
+    color: rgb(41, 41, 135);
+}

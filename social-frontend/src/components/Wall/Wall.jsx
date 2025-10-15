@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CRUDDropDown from "../CRUDDropdown/CRUDDropdown";
+import './Wall.css'
 
 export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
     const [statusContent, setStatusContent] = useState('')
@@ -34,6 +35,14 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
         }
     }
 
+    async function handleLike(postId) {
+        //useeffect to add like to that post
+    }
+
+    async function handleComment(postId) {
+        //useeffect to add comment to that post
+    }
+
     return (
         <>
             <div className="user-wall">
@@ -45,8 +54,8 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                                 name="statusContent"
                                 value={statusContent}
                                 onChange={(e) => setStatusContent(e.target.value)}
-                                rows="5" //rows in text area
-                                cols="50" // width
+                                rows="2" //rows in text area
+                                cols="100" // width
                             />
                             <button className="msg-send-btn button-2000s" type="submit">Send</button>
                     </form>
@@ -56,19 +65,31 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                         <div key={wallPost.id} className="wallpost-item">
                         {/* check if it's a self post and adjust the display */}
                             { (wallPost.senderId==wallPost.receiverId) ?
-                                <div key={wallPost.id} className="user-post">
-                                    <span className="message-context"><b>{wallPost.sender.name} says:</b></span>
+                                <div key={wallPost.id} className="wallpost user-post">
+                                    <div className="top-row">
+                                        <span className="message-context"><b>{wallPost.sender.name} says:</b></span>
+                                        <span>{wallPost.sendTime}</span>
+                                    </div>
                                     <div className="message-content">{wallPost.content}</div>
                                 </div>
                                 :
-                                <div key={wallPost.id} className="message-in-box your-message">
-                                    <span className="message-context"><b>{wallPost.sender.name} {' > '} {wallPost.receiver.name}:</b></span>
+                                <div key={wallPost.id} className="wallpost sender-post">
+                                    <div className="top-row">
+                                        <span className="message-context"><b>{wallPost.sender.name} {' > '} {wallPost.receiver.name}:</b></span>
+                                        <span>{wallPost.sendTime}</span>
+                                    </div>
                                     <div className="message-content">{wallPost.content}</div>
                                 </div>
                                 
                             }
-                            {/* CRUD Dropdown, pass the current post id in there so you can run functions with it. */}
-                            <CRUDDropDown currentPost={wallPost.id}/>
+                            
+                            <div className="like-comment-list">
+                                { (wallPost.likes.length > 0) ?  <div>{wallPost.likes.length}<div> : <div>0</div> }
+                                <span className="like-comment">Like</span>
+                                <span className="like-comment">Comment</span>
+                                <CRUDDropDown className='crud-dropdown' currentPost={wallPost.id}/>
+                            </div>
+                            {/* <PostComments postId={wallPost.id}/> */}
                         </div>
                     ))}
                 </div>
