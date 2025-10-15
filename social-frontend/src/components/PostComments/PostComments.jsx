@@ -12,16 +12,16 @@ export default function PostComments({ comments, handleComment, showComments, se
         <div className="post-comments">
             <div className="add-comment-input">
                 <form className="comment-form" onSubmit={handleComment}>
-                            <textarea
-                                className="comment-textarea"
-                                id="statusContent"
-                                name="statusContent"
-                                value={commentContent}
-                                onChange={(e) => setCommentContent(e.target.value)}
-                                rows="2" //rows in text area
+                    <textarea
+                        className="comment-textarea"
+                        id="statusContent"
+                        name="statusContent"
+                        value={commentContent}
+                        onChange={(e) => setCommentContent(e.target.value)}
+                        rows="2" //rows in text area
 
-                            />
-                            <button className="comment-btn button-2000s" type="submit">Add comment</button>
+                    />
+                    <button className="comment-btn button-2000s" type="submit">Add comment</button>
                 </form>
             </div>
             <div className="comments-feed">

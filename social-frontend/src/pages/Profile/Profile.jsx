@@ -36,6 +36,8 @@ export default function Profile() {
         .catch((error) => setError(error))
     }, []);
 
+    //fetch details about THIS user's profile(for dynamic links)
+
     //UPDATE: Fetch post that user has received and set wall posts
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');

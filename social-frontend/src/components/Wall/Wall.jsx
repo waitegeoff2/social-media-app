@@ -36,6 +36,16 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                 //set local state variable for instant update. Data was saved to db too
                 // setMessages((prevMessages) => [...prevMessages, { content: messageContent }]);
                 // console.log(messageContent)
+                const newComment = {
+                    senderId: currentUser.id,
+                    receiverId: currentUser.id,
+                    content: statusContent,
+                    sender: {name: currentUser.name},
+                    receiver: {name: currentUser.name},
+                    likes: [],
+                    comments: [],
+                }
+                setUserWallPosts((prevUserWallPosts) => [newComment, ...prevUserWallPosts])
                 setStatusContent('')
             })
         } catch(error) {
@@ -76,6 +86,8 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
     async function handleComment(postId) {
         console.log(postId)
     }
+
+    console.log(userWallPosts)
 
     return (
         <>
