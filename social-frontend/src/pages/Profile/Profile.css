@@ -1,0 +1,5 @@
+.profile-body {
+    display: flex;
+    padding: 40px;
+    gap: 20px;
+}

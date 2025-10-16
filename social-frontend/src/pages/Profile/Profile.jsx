@@ -4,6 +4,8 @@
 
 import { useState, useEffect } from 'react'
 import Wall from '../../components/Wall/Wall'
+import ProfileDetailsSidebar from '../../components/ProfileDetailsSidebar/ProfileDetailsSidebar'
+import './Profile.css'
 
 export default function Profile() {
     //get user info and populate the user's wall when opening profile page
@@ -15,7 +17,6 @@ export default function Profile() {
     //Fetch details about current user
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
-        console.log('running use effect')
 
         fetch(`${apiUrl}/access/user`, { 
                 method: 'GET',
@@ -31,7 +32,6 @@ export default function Profile() {
         return response.json();
         })
         .then((response) => {
-            console.log(response)
             setCurrentUser(response)
         })
         .catch((error) => setError(error))
@@ -54,7 +54,6 @@ export default function Profile() {
             return response.json();
         })
         .then((response) => { 
-            console.log(response)
             setUserWallPosts(response)
             // console.log(response.messagedetails.friendDetails)
             // setSelectedFriend(response.messagedetails.friendDetails)
@@ -67,7 +66,10 @@ export default function Profile() {
     return (
         <>
         {/* PROFILE INFO */}
-        <Wall userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser}/>
+        <div className="profile-body">
+            <ProfileDetailsSidebar currentUser={currentUser} />
+            <Wall userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser}/>
+        </div>
         </>
     )
 }

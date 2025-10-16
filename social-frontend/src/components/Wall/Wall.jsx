@@ -65,11 +65,10 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
         }
     }
 
-    console.log(userWallPosts)
-
     return (
         <>
             <div className="user-wall">
+                <h2 className="wall-header">Your Wall</h2>
                 <div className="status-input">
                     <form className="send-form" onSubmit={handleSubmit}>
                             <textarea
@@ -79,9 +78,9 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                                 value={statusContent}
                                 onChange={(e) => setStatusContent(e.target.value)}
                                 rows="2" //rows in text area
-                                cols="100" // width
+
                             />
-                            <button className="msg-send-btn button-2000s" type="submit">Send</button>
+                            <button className="msg-send-btn button-2000s" type="submit">Update Status</button>
                     </form>
                 </div>
                 <div className="wall-feed">
