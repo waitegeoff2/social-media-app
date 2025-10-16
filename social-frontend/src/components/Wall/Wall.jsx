@@ -86,29 +86,10 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                                         <span>{wallPost.sendTime}</span>
                                     </div>
                                     <div className="message-content">{wallPost.content}</div>
-                                </div>
-                                
+                                </div>          
                             }
-                            {/* <div className="like-comment-list">
-                                { (wallPost.likes).length > 0 ?  
-                                <div className="like-display">
-                                    {(wallPost.likes).length}
-                                    <Icon path={mdiThumbUp} size={0.8} />
-                                </div> 
-                                : 
-                                <div className="like-display">
-                                    <span>0</span>
-                                    <Icon path={mdiThumbUp} size={0.8} />
-                                </div> 
-                                }
-                                <span onClick={() => handleLike(wallPost.id, index)} className="like-comment">Like</span>
-                                <span onClick={changeComments} className="like-comment">Comments ({wallPost.comments.length})</span>
-                                <CRUDDropDown className='crud-dropdown' currentPost={wallPost.id}/>
-                            </div> */}
                             <div className="comments-likes-section">
-                                    <>
-                                    <PostCommentsLikesBar comments={wallPost.comments} likes={wallPost.likes} postId={wallPost.id} postIndex={index} userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser}/>
-                                    </>
+                                <PostCommentsLikesBar comments={wallPost.comments} likes={wallPost.likes} postId={wallPost.id} postIndex={index} userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser}/>
                             </div>
                         </div>
                     ))}

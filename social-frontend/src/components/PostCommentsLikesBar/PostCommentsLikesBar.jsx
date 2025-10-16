@@ -20,6 +20,7 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
 
     async function handleLike(postId, index) {
         console.log(postId)
+        console.log(index)
         const token = localStorage.getItem('jwtToken');
 
         //add message to db
@@ -39,8 +40,13 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                 console.log(response)
                 //temporary state variable for instant update. Add a fake like object to this wallpost (using its index)
                 const newLikes = [...userWallPosts]
-                newLikes[index].likes.push({ author: currentUser.name, authorId: currentUser.id, postId: postId })
-                setUserWallPosts(newLikes)
+                if(newLikes[index].likes.length==1) {
+                    console.log("can't add another like")
+                    return;
+                } else if(newLikes[index].likes.length==0) {
+                    newLikes[index].likes.push({ author: currentUser.name, authorId: currentUser.id, postId: postId })
+                    setUserWallPosts(newLikes)
+                }
             })
         } catch(error) {
             console.log(error)
