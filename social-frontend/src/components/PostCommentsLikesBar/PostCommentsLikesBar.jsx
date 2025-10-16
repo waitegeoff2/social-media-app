@@ -40,7 +40,9 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                 console.log(response)
                 //temporary state variable for instant update. Add a fake like object to this wallpost (using its index)
                 const newLikes = [...userWallPosts]
+                //only allow one like to be added
                 if(newLikes[index].likes.length==1) {
+                    //or REMOVE THE LIKE HERE
                     console.log("can't add another like")
                     return;
                 } else if(newLikes[index].likes.length==0) {
@@ -53,8 +55,42 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
         }
     }
 
-    async function handleComment(postId) {
+    async function handleComment(postId, index) {
         console.log(postId)
+        const token = localStorage.getItem('jwtToken');
+
+        try {
+            await fetch(`${apiUrl}/posts/createcomment`, { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ postId, commentContent }), 
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => { 
+                console.log(response)
+                //temporary comment state variable for instant update.
+                // const newComments = [...userWallPosts]   
+                // const biggestId = newComments[index].comments[0].id
+                // const newId = biggestId + 1 
+                // const newCommentPost = {
+                //     id: newId,
+                //     authorId: currentUser.id,
+                //     postId: postId,
+                //     content: commentContent,
+                // }
+                // newComments[index].comments.push(newCommentPost)
+                // setUserWallPosts(newComments)
+                // setShowComments(true)
+            })
+        } catch(error) {
+            console.log(error)
+        }
+
     }
 
     return (
@@ -75,11 +111,11 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
             <span onClick={changeComments} className="like-comment">Comments ({comments.length})</span>
             <CRUDDropDown className='crud-dropdown' currentPost={postId}/>
         </div>
-        {showComments && 
+        {/* {showComments &&  */}
         <div className="post-comments">
             <div className="add-comment-input">
                 {/* ADD THIS LOGIC ON OTHER PAGE */}
-                <form className="comment-form" onSubmit={handleComment}>
+                <form className="comment-form" onSubmit={() => handleComment(postId, postIndex)}>
                     <textarea
                         className="comment-textarea"
                         id="statusContent"
@@ -93,11 +129,16 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
             </div>
             <div className="comments-feed">
                 {comments.map((comment) => (
-                    <div>{comment.id}</div>
+                    <div className="comment-display" key={comment.id}>
+                        <div className="top-row">
+                            <span className="message-context"><b>{comment.author.name} says:</b></span>
+                        </div>
+                        <div className="message-content">{comment.content}</div>
+                    </div>
                 ))}
             </div>
         </div>
-        }
+        {/* } */}
         </>
     )
 }
