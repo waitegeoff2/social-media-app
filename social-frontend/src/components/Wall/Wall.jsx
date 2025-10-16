@@ -1,18 +1,10 @@
 import { useState } from "react";
-import CRUDDropDown from "../CRUDDropdown/CRUDDropdown";
 import './Wall.css'
-import Icon from '@mdi/react';
-import { mdiThumbUp } from '@mdi/js';
-import PostComments from "../PostComments/PostComments";
+import PostCommentsLikesBar from "../PostCommentsLikesBar/PostCommentsLikesBar";
 
 export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
     const [statusContent, setStatusContent] = useState('')
-    const [showComments, setShowComments] = useState(false)
     const apiUrl = import.meta.env.VITE_API_LINK;
-
-    const changeComments = () => {
-        setShowComments(!showComments); // Toggles the state
-    };
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -33,7 +25,8 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
             })
             .then((response) => { 
                 console.log(response)
-                //add a temporary id to the temporary state variable
+                //add a temporary id to the temporary state variable for instant render
+                //CAN MOVE THIS UP BEFORE API CALL
                 const newArray = [...userWallPosts]   
                 const biggestId = newArray[0].id
                 const newId = biggestId + 1            
@@ -53,39 +46,6 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
         } catch(error) {
             console.log(error)
         }
-    }
-
-    async function handleLike(postId, index) {
-        console.log(postId)
-        const token = localStorage.getItem('jwtToken');
-
-        //add message to db
-        try {
-            await fetch(`${apiUrl}/posts/createlike`, { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ postId }), 
-            })
-            .then((response) => {
-                return response.json();
-            })
-            .then((response) => { 
-                console.log(response)
-                //temporary state variable for instant update. Add a fake like object to this wallpost (using its index)
-                const newLikes = [...userWallPosts]
-                newLikes[index].likes.push({ author: currentUser.name, authorId: currentUser.id, postId: postId })
-                setUserWallPosts(newLikes)
-            })
-        } catch(error) {
-            console.log(error)
-        }
-    }
-
-    async function handleComment(postId) {
-        console.log(postId)
     }
 
     console.log(userWallPosts)
@@ -129,8 +89,7 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                                 </div>
                                 
                             }
-                            
-                            <div className="like-comment-list">
+                            {/* <div className="like-comment-list">
                                 { (wallPost.likes).length > 0 ?  
                                 <div className="like-display">
                                     {(wallPost.likes).length}
@@ -145,10 +104,10 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                                 <span onClick={() => handleLike(wallPost.id, index)} className="like-comment">Like</span>
                                 <span onClick={changeComments} className="like-comment">Comments ({wallPost.comments.length})</span>
                                 <CRUDDropDown className='crud-dropdown' currentPost={wallPost.id}/>
-                            </div>
-                            <div className="comments-section">
+                            </div> */}
+                            <div className="comments-likes-section">
                                     <>
-                                    <PostComments comments={wallPost.comments} handleComment={handleComment} showComments={showComments} setShowComments={setShowComments} postId={wallPost.id}/>
+                                    <PostCommentsLikesBar comments={wallPost.comments} likes={wallPost.likes} postId={wallPost.id} postIndex={index} userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser}/>
                                     </>
                             </div>
                         </div>
