@@ -55,7 +55,9 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
         }
     }
 
-    async function handleComment(postId, index) {
+    async function handleComment(e) {
+        e.preventDefault()
+        console.log('in handle comment')
         console.log(postId)
         const token = localStorage.getItem('jwtToken');
 
@@ -73,19 +75,35 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
             })
             .then((response) => { 
                 console.log(response)
+                console.log('handle function WORKED')
                 //temporary comment state variable for instant update.
-                // const newComments = [...userWallPosts]   
-                // const biggestId = newComments[index].comments[0].id
-                // const newId = biggestId + 1 
-                // const newCommentPost = {
-                //     id: newId,
-                //     authorId: currentUser.id,
-                //     postId: postId,
-                //     content: commentContent,
-                // }
-                // newComments[index].comments.push(newCommentPost)
-                // setUserWallPosts(newComments)
-                // setShowComments(true)
+                const newComments = [...userWallPosts]
+                if (newComments[postIndex].comments.length==0) {
+                    const newId = 0;
+                    const newCommentPost = {
+                        id: newId,
+                        authorId: currentUser.id,
+                        postId: postId,
+                        content: commentContent,
+                    }
+                    newComments[postIndex].comments.push(newCommentPost)
+                    setUserWallPosts(newComments)
+                    setShowComments(true)
+                    setCommentContent('')
+                } else {
+                    const biggestId = newComments[postIndex].comments[0].id
+                    const newId = biggestId + 1 
+                    const newCommentPost = {
+                        id: newId,
+                        authorId: currentUser.id,
+                        postId: postId,
+                        content: commentContent,
+                    }
+                    newComments[postIndex].comments.unshift(newCommentPost)
+                    setUserWallPosts(newComments)
+                    setShowComments(true)
+                    setCommentContent('')
+                }  
             })
         } catch(error) {
             console.log(error)
@@ -111,11 +129,10 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
             <span onClick={changeComments} className="like-comment">Comments ({comments.length})</span>
             <CRUDDropDown className='crud-dropdown' currentPost={postId}/>
         </div>
-        {/* {showComments &&  */}
+        {showComments && 
         <div className="post-comments">
             <div className="add-comment-input">
-                {/* ADD THIS LOGIC ON OTHER PAGE */}
-                <form className="comment-form" onSubmit={() => handleComment(postId, postIndex)}>
+                <form className="comment-form" onSubmit={handleComment}>
                     <textarea
                         className="comment-textarea"
                         id="statusContent"
@@ -131,14 +148,14 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                 {comments.map((comment) => (
                     <div className="comment-display" key={comment.id}>
                         <div className="top-row">
-                            <span className="message-context"><b>{comment.author.name} says:</b></span>
+                            <span className="message-context"><b>{currentUser.name} says:</b></span>
                         </div>
                         <div className="message-content">{comment.content}</div>
                     </div>
                 ))}
             </div>
         </div>
-        {/* } */}
+        }
         </>
     )
 }

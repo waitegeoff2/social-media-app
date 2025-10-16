@@ -27,21 +27,38 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                 console.log(response)
                 //add a temporary id to the temporary state variable for instant render
                 //CAN MOVE THIS UP BEFORE API CALL
-                const newArray = [...userWallPosts]   
-                const biggestId = newArray[0].id
-                const newId = biggestId + 1            
-                const newPost = {
-                    id: newId,
-                    senderId: currentUser.id,
-                    receiverId: currentUser.id,
-                    content: statusContent,
-                    sender: {name: currentUser.name},
-                    receiver: {name: currentUser.name},
-                    likes: [],
-                    comments: [],
+                const newArray = [...userWallPosts] 
+                //check if there's anything in array first
+                if(newArray.length==0) {
+                    const newId =0;
+                    const newPost = {
+                        id: newId,
+                        senderId: currentUser.id,
+                        receiverId: currentUser.id,
+                        content: statusContent,
+                        sender: {name: currentUser.name},
+                        receiver: {name: currentUser.name},
+                        likes: [],
+                        comments: [],
+                    }
+                    setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
+                    setStatusContent('')
+                } else {
+                    const biggestId = newArray[0].id
+                    const newId = biggestId + 1            
+                    const newPost = {
+                        id: newId,
+                        senderId: currentUser.id,
+                        receiverId: currentUser.id,
+                        content: statusContent,
+                        sender: {name: currentUser.name},
+                        receiver: {name: currentUser.name},
+                        likes: [],
+                        comments: [],
+                    }
+                    setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
+                    setStatusContent('')
                 }
-                setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
-                setStatusContent('')
             })
         } catch(error) {
             console.log(error)

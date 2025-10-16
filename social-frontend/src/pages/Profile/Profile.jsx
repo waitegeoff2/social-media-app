@@ -15,6 +15,7 @@ export default function Profile() {
     //Fetch details about current user
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
+        console.log('running use effect')
 
         fetch(`${apiUrl}/access/user`, { 
                 method: 'GET',
