@@ -41,7 +41,7 @@ async function createLike(req, res, next) {
     try {
         const userId = req.user.id;
         const postId = req.body.postId;
-        await db.createLike(userId, postId)
+        const newLikes = await db.createLike(userId, postId)
         res.json('Like added.')
     } catch(error){
         console.error(error);
@@ -54,7 +54,8 @@ async function createComment(req, res, next) {
         const userId = req.user.id;
         const postId = req.body.postId;
         const content = req.body.commentContent;
-        await db.createComment(postId, commentContent)
+        await db.createComment(userId, postId, content)
+        res.json('comment created')
     } catch(error){
         console.error(error);
         next(error);

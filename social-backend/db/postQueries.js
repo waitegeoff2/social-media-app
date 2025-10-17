@@ -10,7 +10,12 @@ async function getWallPosts(userId) {
             include: {
                 sender: true,
                 receiver: true,
-                comments: true,
+                comments: {
+                    include: {
+                        author: true,
+                    }
+                    //GET THESE IN DESCENDING ORDER
+                },
                 likes: true,
             },
             orderBy: {

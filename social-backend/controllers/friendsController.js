@@ -1,0 +1,61 @@
+const db = require('../db/friendsQueries')
+
+async function getUserFriends(req, res, next) {
+    try {
+            const userId = req.user.id;
+            const userFriends = await db.getUserFriends(userId)
+            res.json(userFriends)
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+}
+
+async function getFriendRequests(req, res, next) {
+    try {
+            const userId = req.user.id;
+            const friendRequests = await db.getIncomingRequests(userId)
+            res.json({ requests: friendRequests })
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+}
+
+async function sendRequest(req, res, next) {
+    try {
+        const senderId = req.user.id;
+        const user2email = req.body.contactEmail; //??????
+        //find user 2's id with their email
+        const receiverId = await db.findUserByEmail(user2email)
+        
+        //update both TOREQUEST AND FROMREQUEST
+        await db.sendRequest(senderId, receiverId)
+
+        res.json('Friend request sent.')
+    } catch (error) {
+        next(error)
+    } 
+}
+
+async function addContact(req, res, next) {
+   try {
+        const user1Id = req.user.id;
+        const user2Id = req.body.senderId;
+        const requestId = req.body.requestId;
+
+        await db.addContact(user1Id, user2Id, requestId)
+        res.json('Friend added.')
+    } catch (error) {
+        next(error)
+    } 
+}
+
+
+
+module.exports = {
+    getUserFriends,
+    getFriendRequests,
+    sendRequest,
+    addContact
+}

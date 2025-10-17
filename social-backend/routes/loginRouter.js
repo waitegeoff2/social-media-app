@@ -3,7 +3,7 @@ const loginRouter = Router();
 const passport = require("passport");
 const loginController = require('../controllers/loginController')
 const jwt = require('jsonwebtoken')
-const jwtSecret = process.env.JWT_SECRET; // Use a strong, environment variable for production
+const jwtSecret = process.env.JWT_SECRET; 
 
 //add user
 loginRouter.post('/newuser', loginController.addUser)

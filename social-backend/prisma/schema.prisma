@@ -29,9 +29,9 @@ model User {
   comments  Comment[]
   likes   Like[]
   //the users in this users' friends list
-  friendss  User[]   @relation("UserFriends")
+  contacts  User[]   @relation("UserFriends")
   //the users who have this user in their friends list
-  friendof User[]  @relation("UserFriends")
+  contactof User[]  @relation("UserFriends")
   //the person sending the friend request
   requestfrom   Request [] @relation("requestsender")
   // the person receiving the friend request
