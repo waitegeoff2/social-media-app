@@ -9,6 +9,8 @@ function App() {
   //add the login page here on the top level???
   const [loading, setLoading] = useState(true)
   const [authenticated, setAuthenticated] = useState(false)
+  const [currentUser, setCurrentUser] = useState()
+  const apiUrl = import.meta.env.VITE_API_LINK;
 
   useEffect(() => {
       const token = localStorage.getItem('jwtToken'); // Or wherever your token is stored
@@ -22,7 +24,31 @@ function App() {
       }
   }, []);
 
+  //Fetch details about current user to be used throughout app
+  useEffect(() => {
+        const token = localStorage.getItem('jwtToken');
+
+        fetch(`${apiUrl}/access/user`, { 
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },     
+        })
+        .then((response) => {
+        if (response.status >= 400) {
+            throw new Error("server error");
+        }
+        return response.json();
+        })
+        .then((response) => {
+            setCurrentUser(response)
+        })
+        .catch((error) => setError(error))
+  }, []);
+
   //GET FRIEND REQUESTS SENT TO USER
+
   
 
   return (
@@ -34,7 +60,7 @@ function App() {
     { authenticated ?
       <>
         <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} />
-        <Outlet context={{ authenticated, setAuthenticated }}  />
+        <Outlet context={{ authenticated, setAuthenticated, currentUser }}  />
       </>
       :
       <>
