@@ -15,10 +15,13 @@ export default function NavBar({ authenticated, setAuthenticated }) {
                 <div className="nav-links">
                     <div className="left-links">
                         {/* FROG FACE IMAGE (old school facebook) */}
+                        <Link className='home-link' to='/'> frogbook </Link>
+                        <Link className='nav-link' to='/frogfriends'> Friends </Link>
+                        <Link className='nav-link' to='/thepond'> The Pond </Link>
                         {/* links on left side of page if necessary */}
                     </div>
                     <div className="main-title">
-                       <Link to='/'> frogbook </Link>
+                       
                     </div>
                     <div className="right-links">
                         { authenticated && <button className='button-2000s logOutBtn' onClick={handleLogOut}>Log Out</button> }

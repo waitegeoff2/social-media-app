@@ -63,6 +63,8 @@ export default function Profile() {
         .catch((error) => setError(error))
     }, []);
 
+    //GET THE REQUESTS THAT WERE SENT TO THE USER
+
     return (
         <>
         {/* PROFILE INFO */}

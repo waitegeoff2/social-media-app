@@ -7,6 +7,8 @@ import App from './App.jsx'
 import Profile from './pages/Profile/Profile.jsx';
 import ErrorPage from './components/ErrorElement/ErrorElement.jsx';
 import Register from './pages/Register/Register.jsx'
+import FriendsIndex from './pages/FriendsIndex/FriendsIndex.jsx';
+import PostsIndex from './pages/PostsIndex/PostsIndex.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,8 @@ const router = createBrowserRouter([
       { path: '/profile', element: <Profile />, errorElement: <ErrorPage /> },
       //for users clicking on OTHER USERS' profile pages (get a read only view)
       { path: "profile/:name", element: <Profile /> },
+      { path: '/frogfriends', element: <FriendsIndex /> },
+      { path: '/thepond', element: <PostsIndex /> }
     ],
   },
   //putting this here so it isn't blocked by the authenticate thing to access app outlet context

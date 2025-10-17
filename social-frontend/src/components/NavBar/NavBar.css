@@ -29,9 +29,21 @@
 }
 
 .left-links {
-    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3vh;
+    
     /* flex-grow: 1;
     flex-basis: 0; */
+}
+
+.home-link {
+    font-size: larger;
+}
+
+.nav-link {
+    font-size: medium;
 }
 
 .right-links {

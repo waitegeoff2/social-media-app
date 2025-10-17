@@ -21,6 +21,8 @@ function App() {
         setLoading(false)
       }
   }, []);
+
+  //GET FRIEND REQUESTS SENT TO USER
   
 
   return (
