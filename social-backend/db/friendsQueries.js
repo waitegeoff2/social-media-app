@@ -16,6 +16,22 @@ async function getUserFriends(userId) {
     }  
 }
 
+async function getSuggestedFriends(userId) {
+    try {
+        //find the users and select their contacts so you can exclude the ones who are friends with the user already (or have pending request)
+        const suggestedUsers = await prisma.user.findMany({
+            include: {
+                contacts: true,
+                requestto: true,
+                requestfrom: true,
+            }
+        }) 
+        return suggestedUsers;
+    } catch (error) {
+        console.error("Couldn't find user:", error);
+    } 
+}
+
 async function getFriendRequests(userId) {
     try {
         const sentRequests = await prisma.request.findMany({
@@ -124,6 +140,7 @@ async function addContact(user1Id, user2Id, requestId) {
 
 module.exports = {
     getUserFriends,
+    getSuggestedFriends,
     getFriendRequests,
     findUserByEmail,
     sendRequest,

@@ -11,11 +11,22 @@ async function getUserFriends(req, res, next) {
     }
 }
 
+async function getSuggestedFriends(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const suggestedFriends = await db.getSuggestedFriends(userId)
+            res.json(suggestedFriends)
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+}
+
 async function getFriendRequests(req, res, next) {
     try {
             const userId = req.user.id;
             const friendRequests = await db.getIncomingRequests(userId)
-            res.json({ requests: friendRequests })
+            res.json(friendRequests)
     } catch(error){
         console.error(error);
         next(error);
@@ -55,6 +66,7 @@ async function addContact(req, res, next) {
 
 module.exports = {
     getUserFriends,
+    getSuggestedFriends,
     getFriendRequests,
     sendRequest,
     addContact
