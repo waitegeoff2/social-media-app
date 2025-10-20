@@ -2,7 +2,7 @@
 //can use a "friend" state variable to control what you can see on their page
 import { useState, useEffect } from 'react'
 import { Outlet, useOutletContext, useParams } from 'react-router-dom'
-import Wall from '../../components/Wall/Wall'
+import FriendWall from '../../components/FriendWall/FriendWall'
 import ProfileDetailsSidebar from '../../components/ProfileDetailsSidebar/ProfileDetailsSidebar'
 import './FriendProfile.css'
 
@@ -71,7 +71,7 @@ export default function FriendProfile() {
         <>
         <div className="profile-body">
             <ProfileDetailsSidebar currentUser={currentFriend} />
-            <Wall userWallPosts={friendWallPosts} setUserWallPosts={setFriendWallPosts} currentUser={currentFriend}/>
+            <FriendWall userWallPosts={friendWallPosts} setUserWallPosts={setFriendWallPosts} currentFriend={currentFriend}/>
         </div>
         </>
     )

@@ -1,0 +1,83 @@
+.user-wall {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 20px;
+    border-radius: 5px;
+    
+}
+
+.wall-header {
+    font-size: 40px;
+}
+
+.status-input {
+    display: flex;
+    
+}
+
+.send-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: rgb(159, 191, 159);
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+
+}
+
+.status-textarea {
+    width: 100%;
+}
+
+.msg-send-btn {
+    align-self: flex-end;
+}
+
+.wall-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wallpost-item {
+    border-bottom: 1px solid grey;
+    padding: 15px;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.like-comment-list {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 1px;
+}
+
+.crud-dropdown {
+    margin-left: auto;
+}
+
+.like-comment {
+    font-weight: bold;
+    text-decoration: underline;
+    color: rgb(41, 41, 135);
+}
+
+.like-comment:hover {
+    cursor: pointer;
+}
+
+.like-display {
+    display: flex;
+    text-decoration: underline;
+    gap: 3px;
+    align-items: center;
+    color: rgb(41, 41, 135);
+}

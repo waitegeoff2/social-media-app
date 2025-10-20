@@ -1,10 +1,14 @@
 import { useState } from "react";
-import './Wall.css'
+import './FriendWall.css'
 import PostCommentsLikesBar from "../PostCommentsLikesBar/PostCommentsLikesBar";
+import { useOutletContext } from "react-router-dom";
 
-export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
+export default function Wall({ userWallPosts, setUserWallPosts, currentFriend }) {
+    //currentuserwall is the details of the user whose wall it is
+    //UPDATE BELOW CODE
     const [statusContent, setStatusContent] = useState('')
     const apiUrl = import.meta.env.VITE_API_LINK;
+    const { currentUser } = useOutletContext()
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -68,7 +72,7 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
     return (
         <>
             <div className="user-wall">
-                <h2 className="wall-header">{currentUser && currentUser.name}'s Pad</h2>
+                <h2 className="wall-header">{currentUser.name}'s Pad</h2>
                 <div className="status-input">
                     <form className="send-form" onSubmit={handleSubmit}>
                             <textarea
