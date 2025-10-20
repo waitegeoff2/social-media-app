@@ -9,6 +9,7 @@ import ErrorPage from './components/ErrorElement/ErrorElement.jsx';
 import Register from './pages/Register/Register.jsx'
 import FriendsIndex from './pages/FriendsIndex/FriendsIndex.jsx';
 import PostsIndex from './pages/PostsIndex/PostsIndex.jsx';
+import FriendProfile from './pages/FriendProfile/FriendProfile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
       //for the users' profile page
       { path: '/profile', element: <Profile />, errorElement: <ErrorPage /> },
       //for users clicking on OTHER USERS' profile pages (get a read only view)
-      { path: "profile/:name", element: <Profile /> },
+      { path: "profile/:userId", element: <FriendProfile /> },
       { path: '/frogfriends', element: <FriendsIndex /> },
       { path: '/thepond', element: <PostsIndex /> }
     ],

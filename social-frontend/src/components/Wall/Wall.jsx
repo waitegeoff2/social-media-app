@@ -68,7 +68,7 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
     return (
         <>
             <div className="user-wall">
-                <h2 className="wall-header">Your Pad</h2>
+                <h2 className="wall-header">{currentUser.name}'s Pad</h2>
                 <div className="status-input">
                     <form className="send-form" onSubmit={handleSubmit}>
                             <textarea

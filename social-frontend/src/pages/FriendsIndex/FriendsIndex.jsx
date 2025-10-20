@@ -1,6 +1,6 @@
 // this page displays your friends and also a list of users that you can add
 import { useEffect, useState } from "react";
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Link, Outlet, useOutletContext } from "react-router-dom";
 
 export default function FriendsIndex() {
     const apiUrl = import.meta.env.VITE_API_LINK;
@@ -75,14 +75,14 @@ export default function FriendsIndex() {
                         {(user.id==currentUser.id)  ?
                             <div>don't show this</div>
                             :
-                            <div>{user.name}</div>
+                            <Link className='profile-link' to={`/profile/${user.id}`}> {user.name} </Link>
                         }
                         {/* display add button if NOT in user's friends list */}
                         {userFriends.contacts &&
                         userFriends.contacts.includes(user.id) ?
-                        <div>this is your friend</div>
+                        <div>no button</div>
                         :
-                        <button>add friend</button>
+                        <button>Add friend</button>
                         }
                         </div>
                         
