@@ -22,5 +22,6 @@ loginRouter.post(
 
 //get details about current user after logging in
 loginRouter.get('/user', passport.authenticate('jwt', { session: false }), loginController.getUserDetails)
+loginRouter.get('/friend/:friendId', passport.authenticate('jwt', { session: false }), loginController.getFriendDetails)
 
 module.exports = loginRouter;

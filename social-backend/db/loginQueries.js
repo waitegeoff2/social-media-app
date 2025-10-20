@@ -13,6 +13,20 @@ async function addUser(fullName, userName, birthday, password) {
 }
 
 async function getUserDetails(userId) {
+    console.trace(userId)
+    try {
+        const userDetails = await prisma.user.findUnique({
+            where: {
+                id: userId,
+            },
+        })
+        return userDetails;
+    } catch(error) {
+        console.error("Couldn't find user details: ", error);
+    }
+}
+
+async function getFriendDetails(userId) {
     try {
         const userDetails = await prisma.user.findUnique({
             where: {
@@ -28,4 +42,5 @@ async function getUserDetails(userId) {
 module.exports = {
     addUser,
     getUserDetails,
+    getFriendDetails,
 }

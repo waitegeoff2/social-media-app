@@ -28,6 +28,34 @@ async function getWallPosts(userId) {
     }
 }
 
+async function getFriendWallPosts(userId) {
+    try {
+        //finding messages where the RECEIVER is that user
+        const wallPosts = await prisma.post.findMany({
+            where: {
+                receiverId: userId,
+            },
+            include: {
+                sender: true,
+                receiver: true,
+                comments: {
+                    include: {
+                        author: true,
+                    }
+                    //GET THESE IN DESCENDING ORDER
+                },
+                likes: true,
+            },
+            orderBy: {
+                sendTime: 'desc',
+            }
+        }) 
+        return wallPosts;
+    } catch (error) {
+        console.error("Couldn't find user:", error);
+    }
+}
+
 async function createPost(senderId, receiverId, messageContent) {
     try {
         await prisma.post.create({
@@ -75,6 +103,7 @@ async function createComment(userId, postId, content) {
 
 module.exports = {
     getWallPosts,
+    getFriendWallPosts,
     createPost,
     createLike,
     createComment,

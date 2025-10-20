@@ -68,7 +68,20 @@ async function getUserDetails(req, res, next) {
     }
 }
 
+async function getFriendDetails(req, res, next) {
+    try {
+        const userId = parseInt(req.params.friendId);
+        console.trace(userId)
+        const friendDetails = await db.getFriendDetails(userId)
+        res.json(friendDetails)
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+}
+
 module.exports = {
     addUser,
     getUserDetails,
+    getFriendDetails
 }

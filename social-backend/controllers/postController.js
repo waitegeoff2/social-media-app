@@ -11,6 +11,18 @@ async function getWallPosts(req, res, next) {
     }
 }
 
+async function getFriendWallPosts(req, res, next) {
+    try {
+        //USER ID IS NOT JWT ANYMORE
+        const userId = parseInt(req.params.friendId)
+        const posts = await db.getWallPosts(userId)
+        res.json(posts)
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+}
+
 async function createPost(req, res, next) {
     try {
         const senderId = req.user.id;
@@ -64,6 +76,7 @@ async function createComment(req, res, next) {
 
 module.exports = {
     getWallPosts,
+    getFriendWallPosts,
     createPost,
     deletePost,
     createLike,

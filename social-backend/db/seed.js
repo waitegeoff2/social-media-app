@@ -1,6 +1,6 @@
 const prisma = require('./prisma')
 
-import { faker } from '@faker-js/faker';
+const { faker } = require('@faker-js/faker');
 
 async function main() {
   const numberOfUsers = 5; // Customize the number of users to create
@@ -8,7 +8,6 @@ async function main() {
   for (let i = 0; i < numberOfUsers; i++) {
     await prisma.user.create({
       data: {
-        id: faker.string.uuid(),
         name: faker.person.fullName(),
         username: faker.internet.email(),
         password: faker.internet.password(),
@@ -24,12 +23,13 @@ async function main() {
   console.log(`${numberOfUsers} users created successfully!`);
 }
 
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-});
+// TO RUN: node db/seed.js
+// main()
+//   .then(async () => {
+//     await prisma.$disconnect();
+//   })
+//   .catch(async (e) => {
+//     console.error(e);
+//     await prisma.$disconnect();
+//     process.exit(1);
+// });
