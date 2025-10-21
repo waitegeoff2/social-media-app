@@ -56,7 +56,6 @@ passport.use(new JwtStrategy(jwtOptions, async (jwt_payload, done) => {
         },
         }); // Assuming payload contains user ID
     if (user) {
-      console.trace(user)
       return done(null, user);
     } else {
       return done(null, false);

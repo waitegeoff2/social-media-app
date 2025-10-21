@@ -25,7 +25,7 @@ async function getSuggestedFriends(req, res, next) {
 async function getFriendRequests(req, res, next) {
     try {
             const userId = req.user.id;
-            const friendRequests = await db.getIncomingRequests(userId)
+            const friendRequests = await db.getFriendRequests(userId)
             res.json(friendRequests)
     } catch(error){
         console.error(error);
@@ -42,6 +42,21 @@ async function sendRequest(req, res, next) {
         
         //update both TOREQUEST AND FROMREQUEST
         await db.sendRequest(senderId, receiverId)
+
+        res.json('Friend request sent.')
+    } catch (error) {
+        next(error)
+    } 
+}
+
+async function sendRequestById(req, res, next) {
+    try {
+        const senderId = req.user.id;
+        const user2Id = req.body.userId; //??????
+        //find user 2's id with their email
+
+        //update both TOREQUEST AND FROMREQUEST
+        await db.sendRequest(senderId, user2Id)
 
         res.json('Friend request sent.')
     } catch (error) {
@@ -69,5 +84,6 @@ module.exports = {
     getSuggestedFriends,
     getFriendRequests,
     sendRequest,
+    sendRequestById,
     addContact
 }

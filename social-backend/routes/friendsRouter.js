@@ -16,6 +16,8 @@ friendsRouter.get('/suggestedfrogs', passport.authenticate('jwt', { session: fal
 //send a friend request to that person. Going to enter email and FIND USER by that email. then put a friend request in their user model. 
     //chatRoomRouter.post('/:contactId')
 friendsRouter.post('/requestfriend', passport.authenticate('jwt', { session: false }),  passport.authenticate('jwt', { session: false }), friendsController.sendRequest)
+friendsRouter.post('/requestfriendbyid', passport.authenticate('jwt', { session: false }),  passport.authenticate('jwt', { session: false }), friendsController.sendRequestById)
+
 
 //if friend request is accepted, add friend. try this with jwt tokens
 friendsRouter.post('/addfriend', passport.authenticate('jwt', { session: false }),  passport.authenticate('jwt', { session: false }), friendsController.addContact)

@@ -13,12 +13,16 @@ async function addUser(fullName, userName, birthday, password) {
 }
 
 async function getUserDetails(userId) {
-    console.trace(userId)
     try {
         const userDetails = await prisma.user.findUnique({
             where: {
                 id: userId,
             },
+            //not strictly necessary but good for reference
+            include: {
+                contacts: true,
+                contactof: true,
+            }
         })
         return userDetails;
     } catch(error) {
