@@ -1,13 +1,23 @@
 import './NavBar.css'
 import { Link } from 'react-router-dom'
+import Icon from '@mdi/react';
+import { mdiAccountSupervisor } from '@mdi/js';
+import ContactDropdown from '../../components/ContactDropdown/ContactDropdown'
 
-export default function NavBar({ authenticated, setAuthenticated }) {
+export default function NavBar({ authenticated, setAuthenticated, setCurrentUser, incomingRequests, setIncomingRequests }) {
 
     async function handleLogOut() {
         localStorage.removeItem("jwtToken")
         setAuthenticated(false)
+        setCurrentUser()
         console.log('Logged out. Token removed.')
     }
+
+    const handleDropDownSelect = (selectedValue) => {
+        console.log(selectedValue);
+    };
+
+    console.log(incomingRequests)
 
     return (
         <>
@@ -18,8 +28,12 @@ export default function NavBar({ authenticated, setAuthenticated }) {
                         <Link className='home-link' to='/'> frogbook </Link>
                         <Link className='nav-link' to='/frogfriends'> Friends </Link>
                         <Link className='nav-link' to='/thepond'> The Pond </Link>
-                        {/* DROPDOWN HERE, take from instant messenger app */}
-                        <div>notif*</div>
+                        <ContactDropdown 
+                        options={ incomingRequests }
+                        onSelect={ handleDropDownSelect }
+                        placeholder="Select"
+                        setIncomingRequests={ setIncomingRequests }
+                        />
                     </div>
                     <div className="main-title">
                        

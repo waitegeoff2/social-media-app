@@ -3,6 +3,7 @@ import './App.css'
 import { Outlet } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar';
 import LoginForm from './components/LoginForm/LoginForm';
+import { useNavigate } from 'react-router-dom';
 
 
 function App() {
@@ -10,8 +11,13 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [authenticated, setAuthenticated] = useState(false)
   const [currentUser, setCurrentUser] = useState()
+  const [userFriends, setUserFriends] = useState([])
+  const [incomingRequests, setIncomingRequests] = useState([])
+  const [error, setError] = useState()
   const apiUrl = import.meta.env.VITE_API_LINK;
+  const navigate = useNavigate()
 
+  //if there's a jwt token, grab it when page loads
   useEffect(() => {
       const token = localStorage.getItem('jwtToken'); // Or wherever your token is stored
 
@@ -25,6 +31,7 @@ function App() {
   }, []);
 
   //Fetch details about current user to be used throughout app
+  //run when user logs in
   useEffect(() => {
         const token = localStorage.getItem('jwtToken');
 
@@ -43,12 +50,34 @@ function App() {
         })
         .then((response) => {
             setCurrentUser(response)
+            setUserFriends(response.contacts)
         })
         .catch((error) => setError(error))
-  }, []);
+  }, [authenticated]);
 
   //GET FRIEND REQUESTS PUT ON NAVBAR
-  
+  useEffect(() => {
+        const token = localStorage.getItem('jwtToken');
+
+        fetch(`${apiUrl}/friends/sentrequests`, { 
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },     
+        })
+        .then((response) => {
+        if (response.status >= 400) {
+            throw new Error("server error");
+        }
+        return response.json();
+        })
+        .then((response) => {
+            console.log(response)
+            setIncomingRequests(response.receivedRequests)
+        })
+        .catch((error) => setError(error))
+  }, [authenticated]);
 
   return (
     <>
@@ -58,8 +87,8 @@ function App() {
     <>
     { authenticated ?
       <>
-        <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} />
-        <Outlet context={{ authenticated, setAuthenticated, currentUser }}  />
+        <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} setCurrentUser={setCurrentUser} incomingRequests={incomingRequests} setIncomingRequests={setIncomingRequests} />
+        <Outlet context={{ authenticated, setAuthenticated, currentUser, userFriends }}  />
       </>
       :
       <>
