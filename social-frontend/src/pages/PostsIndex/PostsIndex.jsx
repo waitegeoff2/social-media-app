@@ -1,4 +1,4 @@
-//display your friends' received messages (that will include their statuses and other posts), 
+//display ALL posts (that will include their statuses and other posts), 
 // order by date
 
 export default function PostsIndex() {

@@ -32,6 +32,7 @@ export default function NavBar({ authenticated, setAuthenticated, setCurrentUser
                         options={ incomingRequests }
                         onSelect={ handleDropDownSelect }
                         placeholder="Select"
+                        incomingRequests={incomingRequests}
                         setIncomingRequests={ setIncomingRequests }
                         />
                     </div>

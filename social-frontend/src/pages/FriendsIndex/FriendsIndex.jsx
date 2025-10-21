@@ -137,13 +137,12 @@ export default function FriendsIndex() {
                     {suggestedUsers.map((user, index) => (
                         <div className="suggested-list-item" key={user.id}>
                         {/* display user's name unless it is current user */}
-                        {(user.id==currentUser.id)  ?
-                            <div>don't show this</div>
-                            :
+                        {(user.id!==currentUser.id)  &&
                             <Link className='profile-link' to={`/profile/${user.id}`}> {user.name} </Link>
                         }
                         {/* display add button if NOT in user's friends list */}
                         {userFriends &&
+                        (user.id!==currentUser.id) &&
                         userFriends.some(friend => friend.id === user.id) ?
                         <div><b>Your friend.</b></div>
                         :

@@ -10,10 +10,18 @@ export default function FriendProfile() {
     //get user info and populate the user's wall when opening profile page
     const [friendWallPosts, setFriendWallPosts] = useState([])
     const [currentFriend, setCurrentFriend] = useState('')
+    const [isFriend, setIsFriend] = useState(false)
     const [error, setError] = useState('')
     const apiUrl = import.meta.env.VITE_API_LINK;
     const friendId = useParams()
     console.log(friendId)
+    const { currentUser } = useOutletContext()
+
+    //USEEFFECT TO CHECK IF THIS USER IS YOUR FRIEND, set to true or false
+    useEffect(() => {
+        //if currentuser.contacts CONTAINS friend.id
+        //setisfriend(true)
+    }, []);
 
     //fetch details about THIS user's profile(for dynamic links) INCLUDING MESSAGES THEY'VE RECEIVED
     useEffect(() => {
