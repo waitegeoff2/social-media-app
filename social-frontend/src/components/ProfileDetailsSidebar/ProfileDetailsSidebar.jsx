@@ -19,7 +19,7 @@ export default function ProfileDetailsSidebar({ currentUser }) {
                 <div className="info-list">
                     <div className="info-list-item">
                         <div className="info-list-heading"><b>Birthday: </b></div>
-                        <div className="info-list-info">{currentUser.birthday}</div>
+                        <div className="info-list-info">{currentUser.birthday.split('T')[0]}</div>
                     </div>
                     {currentUser.bio !== null &&
                     <div className="info-list-item">

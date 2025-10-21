@@ -18,7 +18,8 @@ export default function NavBar({ authenticated, setAuthenticated }) {
                         <Link className='home-link' to='/'> frogbook </Link>
                         <Link className='nav-link' to='/frogfriends'> Friends </Link>
                         <Link className='nav-link' to='/thepond'> The Pond </Link>
-                        {/* links on left side of page if necessary */}
+                        {/* DROPDOWN HERE, take from instant messenger app */}
+                        <div>notif*</div>
                     </div>
                     <div className="main-title">
                        

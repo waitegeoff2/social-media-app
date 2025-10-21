@@ -1,6 +1,7 @@
 // this page displays your friends and also a list of users that you can add
 import { useEffect, useState } from "react";
 import { Link, Outlet, useOutletContext } from "react-router-dom";
+import ContactRequestModal from "../../components/ContactRequestModal/ContactRequestModal";
 
 export default function FriendsIndex() {
     const apiUrl = import.meta.env.VITE_API_LINK;
@@ -8,6 +9,40 @@ export default function FriendsIndex() {
     const [suggestedUsers, setSuggestedUsers] = useState([])
     const [error, setError] = useState('')
     const { currentUser } = useOutletContext()
+    //modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [contactEmail, setContactEmail] = useState('');
+
+    function openModal() {
+        setIsModalOpen(true)
+    }
+
+    const closeModal = () => setIsModalOpen(false);
+
+        //to handle sending someone a contact request
+    async function handleRequest(e){
+        closeModal()
+        const token = localStorage.getItem('jwtToken');
+        e.preventDefault();
+        try {
+            await fetch(`${apiUrl}/friends/requestfriend`, {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ contactEmail }),
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => {   
+                // navigate('/')
+            })
+        } catch(error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
@@ -53,18 +88,40 @@ export default function FriendsIndex() {
     return (
         <>
         <div className="friends-index">
-            <div className="friends-list">
+            <div className="friends-list-section">
                 <div className="friends-list-header"><h2>Your friends</h2></div>
-                {userFriends.contacts && 
-                userFriends.contacts.length > 0 ?
-                    <>
-                    {userFriends.contacts.map((contact, index) => (
-                        <div key={contact.id}>{contact.name}</div>
-                    ))}
-                    </>
-                    :
-                    <div>No friends yet. Add some.</div>
-                }
+                <ContactRequestModal isOpen={isModalOpen} onClose={closeModal}>
+                    <div className="contact-request-section">
+                        <h2>Add a New Contact</h2>
+                        <form className="request-form" onSubmit={handleRequest}>
+                            <div className="high-score-input">
+                                <label htmlFor="name">Contact email:</label>
+                                <input 
+                                    type="text"
+                                    id='contactEmail' 
+                                    name='contactEmail'
+                                    placeholder="aaa@aaa.com"
+                                    value={contactEmail}
+                                    onChange={(e) => setContactEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <button className="add-btn button-2000s" type="submit">Send request</button>
+                        </form>
+                    </div>
+                </ContactRequestModal>
+                <div className="friends-list">
+                    {userFriends.contacts && 
+                    userFriends.contacts.length > 0 ?
+                        <>
+                        {userFriends.contacts.map((contact, index) => (
+                            <div key={contact.id}>{contact.name}</div>
+                        ))}
+                        </>
+                        :
+                        <div>No friends yet. Add some.</div>
+                    }
+                </div>
             </div>
             <div className="suggested-friends-sidebar">
                 <div className="suggested-friends-list-header"><h2>Frogs you may know</h2></div>

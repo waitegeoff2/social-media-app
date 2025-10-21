@@ -47,8 +47,7 @@ function App() {
         .catch((error) => setError(error))
   }, []);
 
-  //GET FRIEND REQUESTS SENT TO USER
-
+  //GET FRIEND REQUESTS PUT ON NAVBAR
   
 
   return (
