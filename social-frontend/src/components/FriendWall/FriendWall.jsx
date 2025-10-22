@@ -3,24 +3,43 @@ import './FriendWall.css'
 import PostCommentsLikesBar from "../PostCommentsLikesBar/PostCommentsLikesBar";
 import { useOutletContext } from "react-router-dom";
 
-export default function FriendWall({ userWallPosts, setUserWallPosts, currentFriend }) {
+export default function FriendWall({ userWallPosts, setUserWallPosts, currentFriend, isFriend }) {
     //currentuserwall is the details of the user whose wall it is - receiver id
     //UPDATE BELOW CODE
     const [statusContent, setStatusContent] = useState('')
     const apiUrl = import.meta.env.VITE_API_LINK;
     //the user (you) - the sender id
     const { currentUser } = useOutletContext()
-    console.log(currentUser)
     let sender = currentUser;
-    console.log(sender)
+
+    async function handleBtnRequest(userId) {
+        const token = localStorage.getItem('jwtToken');
+
+        try {
+            await fetch(`${apiUrl}/friends/requestfriendbyid`, {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ userId }),
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => {   
+                console.log(response)
+            })
+        } catch(error) {
+            console.log(error)
+        }
+    }
 
     async function handleSubmit(e) {
         e.preventDefault()
         const token = localStorage.getItem('jwtToken');
         //dealing with naming differences from other component
         let currentUser = currentFriend;
-        
-        console.log(currentUser)
 
         //add message to db
         try {
@@ -78,10 +97,13 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
         }
     }
 
+    console.log(currentFriend)
+
     return (
         <>
             <div className="user-wall">
                 <h2 className="wall-header">{currentFriend.name}'s Pad</h2>
+                {isFriend ? 
                 <div className="status-input">
                     <form className="send-form" onSubmit={handleSubmit}>
                             <textarea
@@ -93,10 +115,14 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
                                 rows="2" //rows in text area
 
                             />
-                            {/* CAN ONLY SEE IF FRIEND */}
-                            <button className="msg-send-btn button-2000s" type="submit">Send Message</button>
-                    </form>
+                            
+                            <button className="msg-send-btn button-2000s" type="submit">Send Message</button>        
+                    </form> 
                 </div>
+                :
+                <button onClick={() => handleBtnRequest(currentFriend.id)} className="add-btn">Add {currentFriend.name} as friend.</button>
+                }
+                {isFriend &&
                 <div className="wall-feed">
                     { userWallPosts.map((wallPost, index) => (
                         <div key={wallPost.id} className="wallpost-item">
@@ -124,6 +150,7 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
                         </div>
                     ))}
                 </div>
+                }
             </div>
         </>
     )

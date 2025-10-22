@@ -17,8 +17,6 @@ export default function NavBar({ authenticated, setAuthenticated, setCurrentUser
         console.log(selectedValue);
     };
 
-    console.log(incomingRequests)
-
     return (
         <>
             <div className="nav-bar">

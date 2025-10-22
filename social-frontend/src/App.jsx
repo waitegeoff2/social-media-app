@@ -73,7 +73,6 @@ function App() {
         return response.json();
         })
         .then((response) => {
-            console.log(response)
             setIncomingRequests(response.receivedRequests)
         })
         .catch((error) => setError(error))

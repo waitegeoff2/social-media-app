@@ -81,3 +81,8 @@
     align-items: center;
     color: rgb(41, 41, 135);
 }
+
+.add-btn {
+    width: 30vh;
+    align-self: center;
+}

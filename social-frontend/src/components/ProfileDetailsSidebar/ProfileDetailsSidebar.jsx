@@ -4,8 +4,7 @@ import './ProfileDetailsSidebar.css'
 
 export default function ProfileDetailsSidebar({ currentUser }) {
     const apiUrl = import.meta.env.VITE_API_LINK;
-
-    console.log(currentUser)
+    
     return (
         <>
         {currentUser && 

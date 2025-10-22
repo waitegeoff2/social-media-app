@@ -14,14 +14,21 @@ export default function FriendProfile() {
     const [error, setError] = useState('')
     const apiUrl = import.meta.env.VITE_API_LINK;
     const friendId = useParams()
-    console.log(friendId)
     const { currentUser } = useOutletContext()
+    console.log(currentUser)
 
     //USEEFFECT TO CHECK IF THIS USER IS YOUR FRIEND, set to true or false
     useEffect(() => {
-        //if currentuser.contacts CONTAINS friend.id
-        //setisfriend(true)
-    }, []);
+        const targetId = currentFriend.id
+        //checking if some value in the current user's contacts array matches the id of this user's page (ie. if the users are friends)
+        if(currentUser && currentUser.contacts.some(contact => contact.id === targetId)) {
+            setIsFriend(true)
+        } else {
+            setIsFriend(false)
+        }
+
+        console.log(isFriend)
+    }, [currentFriend]);
 
     //fetch details about THIS user's profile(for dynamic links) INCLUDING MESSAGES THEY'VE RECEIVED
     useEffect(() => {
@@ -62,7 +69,6 @@ export default function FriendProfile() {
             return response.json();
         })
         .then((response) => { 
-            console.log(response)
             setFriendWallPosts(response)
             // console.log(response.messagedetails.friendDetails)
             // setSelectedFriend(response.messagedetails.friendDetails)
@@ -72,14 +78,13 @@ export default function FriendProfile() {
         .catch((error) => setError(error))
     }, []);
 
-    //GET THE REQUESTS THAT WERE SENT TO THE USER
-    console.log(currentFriend)
+    console.log(isFriend)
 
     return (
         <>
         <div className="profile-body">
             <ProfileDetailsSidebar currentUser={currentFriend} />
-            <FriendWall userWallPosts={friendWallPosts} setUserWallPosts={setFriendWallPosts} currentFriend={currentFriend}/>
+            <FriendWall userWallPosts={friendWallPosts} setUserWallPosts={setFriendWallPosts} currentFriend={currentFriend} isFriend={isFriend}/>
         </div>
         </>
     )
