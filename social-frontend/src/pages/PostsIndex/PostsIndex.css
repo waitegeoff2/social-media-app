@@ -1,0 +1,9 @@
+.posts-index-list-container {
+    width: 80vh; /* container width */
+    height: 70vh; 
+    overflow: auto; /* scroll when content goes outside borders */
+    border: 1px solid #ccc; /* Optional: Add a border for visual clarity */
+    padding: 10px; 
+    background-color: rgb(230, 255, 230);
+    border-radius: 5px;
+}
