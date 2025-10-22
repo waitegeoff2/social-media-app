@@ -14,8 +14,8 @@ async function getWallPosts(req, res, next) {
 async function getRecentPosts(req, res, next) {
     try {
         //get ALL recent posts to display on posts index page
-        // const userId = req.user.id;
-        // const posts = await db.getWallPosts(userId)
+        const userId = req.user.id;
+        const posts = await db.getRecentPosts(userId)
         res.json(posts)
     } catch(error){
         console.error(error);

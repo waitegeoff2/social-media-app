@@ -28,6 +28,37 @@ async function getWallPosts(userId) {
     }
 }
 
+async function getRecentPosts(userId) {
+    try {
+        //SEE IF THIS WORKS
+        const recentPosts = await prisma.user.findUnique({
+            where: {
+                id: userId,
+            },
+            include: {
+                contacts: {
+                    include: {
+                        postfrom: {
+                            include: {
+                                sender: true,
+                                receiver: true,
+                                comments: true,
+                                likes: true,
+                            },
+                        }, // Include all messages received by this friend
+                    },
+            },
+            orderBy: {
+                sendTime: 'desc',
+            },
+        }
+        }) 
+        return recentPosts;
+    } catch (error) {
+        console.error("Couldn't find user:", error);
+    }
+}
+
 async function getFriendWallPosts(userId) {
     try {
         //finding messages where the RECEIVER is that user
@@ -103,6 +134,7 @@ async function createComment(userId, postId, content) {
 
 module.exports = {
     getWallPosts,
+    getRecentPosts,
     getFriendWallPosts,
     createPost,
     createLike,
