@@ -151,6 +151,7 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                 {comments.map((comment) => (
                     <div className="comment-display" key={comment.id}>
                         <div className="top-row">
+                            {/* *********** */}
                             <span className="message-context"><b>{currentUser.name} says:</b></span>
                         </div>
                         <div className="message-content">{comment.content}</div>

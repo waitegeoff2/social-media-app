@@ -126,10 +126,10 @@ export default function FriendsIndex() {
                                 </div>
                             }
                             {/* display add button if NOT in user's friends list */}
-                            {userFriends &&
+                            {(userFriends &&
                             currentUser &&
                             (user.id!==currentUser.id) &&
-                            userFriends.some(friend => friend.id === user.id) ?
+                            userFriends.some(friend => friend.id === user.id)) ?
                             <div><b>Your friend.</b></div>
                             :
                             <button onClick={() => handleBtnRequest(user.id)}>Add friend</button>
