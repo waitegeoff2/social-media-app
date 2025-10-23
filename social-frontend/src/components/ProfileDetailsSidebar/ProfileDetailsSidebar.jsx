@@ -9,7 +9,6 @@ export default function ProfileDetailsSidebar({ userWall }) {
 
     const {currentUser} = useOutletContext()
 
-
     return (
         <>
         {userWall && 

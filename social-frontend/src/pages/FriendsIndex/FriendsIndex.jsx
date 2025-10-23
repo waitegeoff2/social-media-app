@@ -103,7 +103,7 @@ export default function FriendsIndex() {
                         <>
                         {userFriends.map((contact, index) => (
                             <div key={contact.id} className="user-box">
-                                <img className="display-picture" src={ contact.profilepic === null ? frogimage : currentUser.profilepic} alt="The chat recipient's profile picture" />                                
+                                <img className="display-picture" src={ contact.profilepic === null ? frogimage : contact.profilepic} alt="The chat recipient's profile picture" />                                
                                 <Link className='profile-link' to={`/profile/${contact.id}`}> <div>{contact.name}</div> </Link>
                             </div>
                         ))}
@@ -121,7 +121,7 @@ export default function FriendsIndex() {
                         {/* display user's name unless it is current user */}
                             {(user.id!==currentUser.id)  &&
                                 <div key={user.id} className="user-info-box">
-                                    <img className="display-picture" src={ user.profilepic === null ? frogimage : currentUser.profilepic} alt="The chat recipient's profile picture" />                                
+                                    <img className="display-picture" src={ user.profilepic === null ? frogimage : user.profilepic} alt="The chat recipient's profile picture" />                                
                                     <Link className='profile-link' to={`/profile/${user.id}`}> {user.name} </Link>
                                 </div>
                             }

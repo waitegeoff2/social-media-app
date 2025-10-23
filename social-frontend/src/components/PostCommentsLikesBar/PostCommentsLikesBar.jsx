@@ -41,11 +41,11 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                 //temporary state variable for instant update. Add a fake like object to this wallpost (using its index)
                 const newLikes = [...userWallPosts]
                 //only allow one like to be added
-                if(newLikes[index].likes.length==1) {
+                if(newLikes[index].likes.some(like => like.authorId === currentUser.id)) {
                     //or REMOVE THE LIKE HERE
                     console.log("can't add another like")
                     return;
-                } else if(newLikes[index].likes.length==0) {
+                } else {
                     newLikes[index].likes.push({ author: currentUser.name, authorId: currentUser.id, postId: postId })
                     setUserWallPosts(newLikes)
                 }
@@ -110,6 +110,9 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
         }
 
     }
+
+    console.log(userWallPosts)
+    console.log(currentUser)
 
     return (
         <>
