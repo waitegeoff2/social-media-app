@@ -49,7 +49,7 @@ export default function Profile() {
         <>
         {/* PROFILE INFO */}
         <div className="profile-body">
-            <ProfileDetailsSidebar currentUser={currentUser} />
+            <ProfileDetailsSidebar userWall={currentUser} />
             <Wall userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser}/>
         </div>
         </>

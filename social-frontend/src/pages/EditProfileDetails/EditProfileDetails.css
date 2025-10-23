@@ -1,0 +1,14 @@
+.profile-section { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: sans-serif;
+    padding-top: 7vh;
+    gap: 20px;
+}
+
+.registration-form {
+    display: flex;
+    width: 300px;
+}

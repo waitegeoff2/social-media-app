@@ -95,7 +95,7 @@ function App() {
     { authenticated ?
       <>
         <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} setCurrentUser={setCurrentUser} incomingRequests={incomingRequests} setIncomingRequests={setIncomingRequests} />
-        <Outlet context={{ authenticated, setAuthenticated, currentUser, userFriends }}  />
+        <Outlet context={{ authenticated, setAuthenticated, currentUser, setCurrentUser, userFriends }}  />
       </>
       :
       <>

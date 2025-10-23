@@ -10,6 +10,7 @@ import Register from './pages/Register/Register.jsx'
 import FriendsIndex from './pages/FriendsIndex/FriendsIndex.jsx';
 import PostsIndex from './pages/PostsIndex/PostsIndex.jsx';
 import FriendProfile from './pages/FriendProfile/FriendProfile.jsx';
+import EditProfileDetails from './pages/EditProfileDetails/EditProfileDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,8 @@ const router = createBrowserRouter([
       //for users clicking on OTHER USERS' profile pages (get a read only view)
       { path: "profile/:userId", element: <FriendProfile /> },
       { path: '/frogfriends', element: <FriendsIndex /> },
-      { path: '/thepond', element: <PostsIndex /> }
+      { path: '/thepond', element: <PostsIndex /> },
+      { path: '/editprofile', element: <EditProfileDetails /> },
     ],
   },
   //putting this here so it isn't blocked by the authenticate to access app outlet context

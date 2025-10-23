@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, Outlet, useOutletContext } from "react-router-dom";
 import ContactRequestModal from "../../components/ContactRequestModal/ContactRequestModal";
 import './FriendsIndex.css'
+import frogimage from '../../assets/frogimg.jpg'
 
 export default function FriendsIndex() {
     const apiUrl = import.meta.env.VITE_API_LINK;
@@ -101,7 +102,10 @@ export default function FriendsIndex() {
                     userFriends.length > 0 ?
                         <>
                         {userFriends.map((contact, index) => (
-                            <Link className='profile-link' to={`/profile/${contact.id}`}> <div key={contact.id}>{contact.name}</div> </Link>
+                            <div key={contact.id} className="user-box">
+                                <img className="display-picture" src={ contact.profilepic === null ? frogimage : currentUser.profilepic} alt="The chat recipient's profile picture" />                                
+                                <Link className='profile-link' to={`/profile/${contact.id}`}> <div>{contact.name}</div> </Link>
+                            </div>
                         ))}
                         </>
                         :
@@ -115,18 +119,21 @@ export default function FriendsIndex() {
                     {suggestedUsers.map((user, index) => (
                         <div className="suggested-list-item" key={user.id}>
                         {/* display user's name unless it is current user */}
-                        {(user.id!==currentUser.id)  &&
-                            <Link className='profile-link' to={`/profile/${user.id}`}> {user.name} </Link>
-                        }
-                        {/* display add button if NOT in user's friends list */}
-                        {userFriends &&
-                        currentUser &&
-                        (user.id!==currentUser.id) &&
-                        userFriends.some(friend => friend.id === user.id) ?
-                        <div><b>Your friend.</b></div>
-                        :
-                        <button onClick={() => handleBtnRequest(user.id)}>Add friend</button>
-                        }
+                            {(user.id!==currentUser.id)  &&
+                                <div key={user.id} className="user-info-box">
+                                    <img className="display-picture" src={ user.profilepic === null ? frogimage : currentUser.profilepic} alt="The chat recipient's profile picture" />                                
+                                    <Link className='profile-link' to={`/profile/${user.id}`}> {user.name} </Link>
+                                </div>
+                            }
+                            {/* display add button if NOT in user's friends list */}
+                            {userFriends &&
+                            currentUser &&
+                            (user.id!==currentUser.id) &&
+                            userFriends.some(friend => friend.id === user.id) ?
+                            <div><b>Your friend.</b></div>
+                            :
+                            <button onClick={() => handleBtnRequest(user.id)}>Add friend</button>
+                            }
                         </div>
                         
                     ))}

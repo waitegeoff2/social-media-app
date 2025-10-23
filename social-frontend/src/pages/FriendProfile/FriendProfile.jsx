@@ -83,7 +83,7 @@ export default function FriendProfile() {
     return (
         <>
         <div className="profile-body">
-            <ProfileDetailsSidebar currentUser={currentFriend} />
+            <ProfileDetailsSidebar userWall={currentFriend}  />
             <FriendWall userWallPosts={friendWallPosts} setUserWallPosts={setFriendWallPosts} currentFriend={currentFriend} isFriend={isFriend}/>
         </div>
         </>
