@@ -8,6 +8,8 @@ import Wall from '../../components/Wall/Wall'
 import ProfileDetailsSidebar from '../../components/ProfileDetailsSidebar/ProfileDetailsSidebar'
 import './Profile.css'
 
+let fakeCurrentUser = {}
+
 export default function Profile() {
     //get user info and populate the user's wall when opening profile page
     const [userWallPosts, setUserWallPosts] = useState([])

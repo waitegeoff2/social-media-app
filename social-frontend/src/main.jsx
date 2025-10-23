@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       { path: '/thepond', element: <PostsIndex /> }
     ],
   },
-  //putting this here so it isn't blocked by the authenticate thing to access app outlet context
+  //putting this here so it isn't blocked by the authenticate to access app outlet context
   {
     path: '/register', element: <Register />,
   },

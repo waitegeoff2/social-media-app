@@ -1,9 +1,26 @@
+.posts-index-feed {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+    align-items: center;
+    padding: 5vh;
+}
+
 .posts-index-list-container {
-    width: 80vh; /* container width */
+    width: 100vh; /* container width */
     height: 70vh; 
     overflow: auto; /* scroll when content goes outside borders */
     border: 1px solid #ccc; /* Optional: Add a border for visual clarity */
     padding: 10px; 
     background-color: rgb(230, 255, 230);
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+
+.post-index-post {
+    border-bottom: 1px solid grey;
 }

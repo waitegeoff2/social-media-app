@@ -54,7 +54,7 @@ export default function PostsIndex() {
             <div className="posts-index-list-container">
                 { indexPosts.map((post, index) => (
                     (post.receiverId==post.senderId) ?
-                        <div key={post.id} className="wallpost user-post">
+                        <div key={post.id} className="wallpost user-post post-index-post">
                             <div className="top-row">
                                 <span className="message-context"><Link className='profile-link' to={`/profile/${post.sender.id}`}><b>{post.sender.name}</b></Link> says:</span>
                                 <span>{post.sendTime}</span>
@@ -62,7 +62,7 @@ export default function PostsIndex() {
                             <div className="message-content">{post.content}</div>
                         </div>
                         :
-                        <div key={post.id} className="wallpost sender-post">
+                        <div key={post.id} className="wallpost sender-post post-index-post">
                             <div className="top-row">
                                 <span className="message-context"><Link className='profile-link' to={`/profile/${post.sender.id}`}><b>{post.sender.name}</b></Link> {' > '} <Link className='profile-link' to={`/profile/${post.receiver.id}`}><b>{post.receiver.name}</b> </Link>:</span>
                                 <span>{post.sendTime}</span>

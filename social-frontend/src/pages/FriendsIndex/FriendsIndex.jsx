@@ -67,28 +67,6 @@ export default function FriendsIndex() {
         }
     }
 
-    //MOVED THIS TO TOP LEVEL (pull up friends when user loads)
-
-    // useEffect(() => {
-    //     const token = localStorage.getItem('jwtToken');
-
-    //     fetch(`${apiUrl}/friends`, { 
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${token}`
-    //         }, 
-    //     })
-    //     .then((response) => {
-    //         return response.json();
-    //     })
-    //     .then((response) => { 
-    //         console.log(response)
-    //         setUserFriends(response)
-    //     })
-    //     .catch((error) => setError(error))
-    // }, []);
-
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
 
@@ -142,6 +120,7 @@ export default function FriendsIndex() {
                         }
                         {/* display add button if NOT in user's friends list */}
                         {userFriends &&
+                        currentUser &&
                         (user.id!==currentUser.id) &&
                         userFriends.some(friend => friend.id === user.id) ?
                         <div><b>Your friend.</b></div>

@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom'
 import './LoginForm.css'
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm({ setAuthenticated }) {
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [errMessage, setErrMessage] = useState('');
     const apiUrl = import.meta.env.VITE_API_LINK;
+    const navigate = useNavigate()
 
    async function handleSubmit(e) {
         e.preventDefault()
@@ -30,7 +32,8 @@ export default function LoginForm({ setAuthenticated }) {
                     let data = response.token
                     localStorage.setItem('jwtToken', data)
                     setAuthenticated(true)
-                    // setTriggerJwt('new') ADD
+                    //takes to home page (top level of app)
+                    navigate('/')
                     console.log("token put into localStorage")
                 }
                 console.log(response)
