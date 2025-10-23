@@ -1,5 +1,8 @@
 const db = require('../db/uploadQueries')
 require('dotenv').config();
+const supabase = require('../config/supabase')
+
+
 
 async function uploadFile(req, res, next) {
     if (!req.file) {
@@ -10,6 +13,8 @@ async function uploadFile(req, res, next) {
     const fileName = `${Date.now()}-${req.file.originalname}`; // Unique filename
     const bucketName = process.env.SUPABASE_BUCKET_NAME; // Replace with your Supabase bucket name
     const filePath = `public/${fileName}`; // Path within the bucket
+
+    const userId = req.user.id;
 
     try {
         const { data, error } = await supabase.storage
@@ -28,6 +33,8 @@ async function uploadFile(req, res, next) {
         const { data: publicUrlData } = supabase.storage
             .from(bucketName)
             .getPublicUrl(filePath);
+
+        await db.uploadFile(userId, publicUrlData.publicUrl)
 
         res.status(200).json({ message: 'File uploaded successfully!', url: publicUrlData.publicUrl });
     } catch (error) {

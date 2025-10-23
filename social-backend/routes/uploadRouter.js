@@ -20,6 +20,6 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 //upload file (save filepath to db and add to multer uploads folder)
-uploadRouter.post('/', upload.single('file'),  uploadController.uploadFile)
+uploadRouter.post('/', passport.authenticate('jwt', { session: false }), upload.single('file'),  uploadController.uploadFile)
 
 module.exports = uploadRouter;

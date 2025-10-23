@@ -1,13 +1,14 @@
-const prisma = require('./prisma')
+const prisma = require('./prisma');
 
-async function uploadFile(userId, filePath) {
+//update profile details
+async function updateProfile(userId, bio) {
     try {
         await prisma.user.update({
             where: {
                 id: userId,
             },
             data: {
-                profilepic: filePath,
+                bio: bio,
             }
         })
     } catch (error) {
@@ -16,5 +17,5 @@ async function uploadFile(userId, filePath) {
 }
 
 module.exports = {
-    uploadFile,
+    updateProfile,
 }

@@ -38,12 +38,15 @@ const loginRouter = require("./routes/loginRouter")
 const postRouter = require('./routes/postRouter')
 const friendsRouter = require('./routes/friendsRouter')
 const uploadRouter = require('./routes/uploadRouter')
+const profileRouter = require('./routes/profileRouter')
 
 app.use("/", indexRouter)
 app.use('/access', loginRouter)
 app.use('/posts', postRouter)
 app.use('/friends', friendsRouter)
 app.use('/upload', uploadRouter)
+app.use('/profile', profileRouter)
+
 
 // Error middleware: Every thrown error in the application or the previous middleware function calling `next` with an error as an argument will eventually go to this middleware function
 app.use((error, req, res, next) => {
