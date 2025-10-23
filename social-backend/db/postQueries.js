@@ -11,9 +11,12 @@ async function getWallPosts(userId) {
                 sender: true,
                 receiver: true,
                 comments: {
+                    orderBy: {
+                        createdAt: 'desc',
+                    },
                     include: {
                         author: true,
-                    }
+                    },
                     //GET THESE IN DESCENDING ORDER
                 },
                 likes: true,
@@ -39,19 +42,26 @@ async function getRecentPosts(userId) {
                 contacts: {
                     include: {
                         postfrom: {
+                            // take max of 10 recents posts per user
+                            take: 10,
                             include: {
                                 sender: true,
                                 receiver: true,
-                                comments: true,
+                                comments: { 
+                                    orderBy: {
+                                        createdAt: 'desc',
+                                    },
+                                },
                                 likes: true,
+                            },
+                            orderBy: {
+                                    sendTime: 'desc',
                             },
                         }, // Include all messages received by this friend
                     },
+                
             },
-            orderBy: {
-                sendTime: 'desc',
-            },
-        }
+        },
         }) 
         return recentPosts;
     } catch (error) {
@@ -70,9 +80,12 @@ async function getFriendWallPosts(userId) {
                 sender: true,
                 receiver: true,
                 comments: {
+                    orderBy: {
+                        createdAt: 'desc',
+                    },
                     include: {
                         author: true,
-                    }
+                    },
                     //GET THESE IN DESCENDING ORDER
                 },
                 likes: true,
