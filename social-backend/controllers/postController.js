@@ -55,7 +55,9 @@ async function createPost(req, res, next) {
 async function deletePost(req, res, next) {
 try {
         const userId = req.user.id;
-        
+        const postId = req.body.postId;
+        await db.deletePost(postId)
+        res.json('post deleted')
         // const messageContent = req.body.statusContent;
         // await db.createPost(senderId, receiverId, messageContent)
         // res.json('Post created.')

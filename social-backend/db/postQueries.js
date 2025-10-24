@@ -161,6 +161,20 @@ async function createComment(userId, postId, content) {
     }
 }
 
+async function deletePost(postId) { 
+    let thisPost = postId
+    
+    try {
+        await prisma.post.delete({
+            where: {
+                id: postId,
+            }
+        })
+    } catch (error) {
+        console.error("Couldn't delete comment:", error);
+    }
+}
+
 module.exports = {
     getWallPosts,
     getMaxPostsId,
@@ -169,4 +183,5 @@ module.exports = {
     createPost,
     createLike,
     createComment,
+    deletePost,
 }
