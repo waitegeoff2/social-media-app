@@ -1,5 +1,3 @@
-//This is a profile of someone you click on, generated using a dynamic url
-//can use a "friend" state variable to control what you can see on their page
 import { useState, useEffect } from 'react'
 import { Outlet, useOutletContext, useParams } from 'react-router-dom'
 import FriendWall from '../../components/FriendWall/FriendWall'
@@ -7,7 +5,6 @@ import ProfileDetailsSidebar from '../../components/ProfileDetailsSidebar/Profil
 import './FriendProfile.css'
 
 export default function FriendProfile() {
-    //get user info and populate the user's wall when opening profile page
     const [friendWallPosts, setFriendWallPosts] = useState([])
     const [currentFriend, setCurrentFriend] = useState('')
     const [isFriend, setIsFriend] = useState(false)
@@ -17,10 +14,10 @@ export default function FriendProfile() {
     const { currentUser, userFriends } = useOutletContext()
     console.log(currentUser)
 
-    //USEEFFECT TO CHECK IF THIS USER IS YOUR FRIEND, set to true or false
+    //check if this user is currentusers' friend. Adjust wall accordingly
     useEffect(() => {
         const targetId = currentFriend.id
-        //checking if some value in the current user's contacts array matches the id of this user's page (ie. if the users are friends)
+
         if(currentUser && currentUser.contacts.some(contact => contact.id === targetId)) {
             setIsFriend(true)
         } else {
@@ -30,7 +27,7 @@ export default function FriendProfile() {
         console.log(isFriend)
     }, [currentFriend, userFriends]);
 
-    //fetch details about THIS user's profile(for dynamic links) INCLUDING MESSAGES THEY'VE RECEIVED
+    //fetch details about this user to populate profile
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
 
@@ -54,7 +51,7 @@ export default function FriendProfile() {
         .catch((error) => setError(error))
     }, []);
 
-    //UPDATE: Fetch posts that THIS user has received and set wall posts
+    // Fetch posts that this user has received and set wall posts
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
 
@@ -70,10 +67,6 @@ export default function FriendProfile() {
         })
         .then((response) => { 
             setFriendWallPosts(response)
-            // console.log(response.messagedetails.friendDetails)
-            // setSelectedFriend(response.messagedetails.friendDetails)
-            // setMessages(response.messagedetails.messageHistory)
-            // console.log('New chat selected.')
         })
         .catch((error) => setError(error))
     }, []);

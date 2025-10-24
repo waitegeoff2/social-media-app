@@ -20,7 +20,7 @@ export default function FriendsIndex() {
 
     const closeModal = () => setIsModalOpen(false);
 
-        //to handle sending someone a contact request
+    //handle sending someone a contact request
     async function handleRequest(e){
         closeModal()
         const token = localStorage.getItem('jwtToken');
@@ -68,6 +68,7 @@ export default function FriendsIndex() {
         }
     }
 
+    //get a list of users to suggest as potential friends
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
 
@@ -87,9 +88,6 @@ export default function FriendsIndex() {
         })
         .catch((error) => setError(error))
     }, []);
-
-    console.log(currentUser)
-    console.log(userFriends)
 
     return (
         <>
@@ -118,7 +116,6 @@ export default function FriendsIndex() {
                 <div className="suggested-friends-list">
                     {suggestedUsers.map((user, index) => (
                         <div className="suggested-list-item" key={user.id}>
-                        {/* display user's name unless it is current user */}
                             {(user.id!==currentUser.id)  && (
                                 <div key={user.id} className="user-info-box">
                                     <img className="display-picture" src={ user.profilepic === null ? frogimage : user.profilepic} alt="The chat recipient's profile picture" />                                
@@ -132,12 +129,8 @@ export default function FriendsIndex() {
                                         <button onClick={() => handleBtnRequest(user.id)}>Add friend</button>
                                     }
                                 </div>
-                                // logic should go here because you've already taken out the current user
-                            )}
-                            {/* display add button if NOT in user's friends list */}
-                            
-                        </div>
-                        
+                            )}                            
+                        </div>                       
                     ))}
                 </div>
             </div>

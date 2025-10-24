@@ -1,6 +1,3 @@
-//display ALL posts (that will include their statuses and other posts), 
-// order by date
-
 import { useEffect, useState } from "react";
 import './PostsIndex.css'
 import { Link } from "react-router-dom";
@@ -11,7 +8,7 @@ export default function PostsIndex() {
     const [indexPosts, setIndexPosts] = useState([])
     const [error, setError] = useState()
 
-    //useeffect here to get posts
+    //Fetch recent posts from users' friends
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
 
@@ -39,7 +36,6 @@ export default function PostsIndex() {
             })
             console.log(allRecents)
             setIndexPosts(allRecents)
-            //MAP the response.contacts array and then MAP the inner response.contacts.postsfrom
         })
         .catch((error) => setError(error))
     }, []);
@@ -49,27 +45,26 @@ export default function PostsIndex() {
     return (
         <>
         <div className="posts-index-feed">
-            {/* indexposts.map */}
             <div className="posts-index-header"><h2>Recent posts from your frogs (friends):</h2></div>
             <div className="posts-index-list-container">
-                { indexPosts.map((post, index) => (
-                    (post.receiverId==post.senderId) ?
-                        <div key={post.id} className="wallpost user-post post-index-post">
-                            <div className="top-row">
-                                <span className="message-context"><Link className='profile-link' to={`/profile/${post.sender.id}`}><b>{post.sender.name}</b></Link> says:</span>
-                                <span>{post.sendTime}</span>
-                            </div>
-                            <div className="message-content">{post.content}</div>
+            { indexPosts.map((post, index) => (
+                (post.receiverId==post.senderId) ?
+                    <div key={post.id} className="wallpost user-post post-index-post">
+                        <div className="top-row">
+                            <span className="message-context"><Link className='profile-link' to={`/profile/${post.sender.id}`}><b>{post.sender.name}</b></Link> says:</span>
+                            <span>{post.sendTime}</span>
                         </div>
-                        :
-                        <div key={post.id} className="wallpost sender-post post-index-post">
-                            <div className="top-row">
-                                <span className="message-context"><Link className='profile-link' to={`/profile/${post.sender.id}`}><b>{post.sender.name}</b></Link> {' > '} <Link className='profile-link' to={`/profile/${post.receiver.id}`}><b>{post.receiver.name}</b> </Link>:</span>
-                                <span>{post.sendTime}</span>
-                            </div>
-                            <div className="message-content">{post.content}</div>
-                        </div>          
-                ))}
+                        <div className="message-content">{post.content}</div>
+                    </div>
+                    :
+                    <div key={post.id} className="wallpost sender-post post-index-post">
+                        <div className="top-row">
+                            <span className="message-context"><Link className='profile-link' to={`/profile/${post.sender.id}`}><b>{post.sender.name}</b></Link> {' > '} <Link className='profile-link' to={`/profile/${post.receiver.id}`}><b>{post.receiver.name}</b> </Link>:</span>
+                            <span>{post.sendTime}</span>
+                        </div>
+                        <div className="message-content">{post.content}</div>
+                    </div>          
+            ))}
             </div>
         </div>
         </>

@@ -18,16 +18,15 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Navigate to="/profile" replace /> },
-      //for the users' profile page
+      //current users' profile page
       { path: '/profile', element: <Profile />, errorElement: <ErrorPage /> },
-      //for users clicking on OTHER USERS' profile pages (get a read only view)
+      //dynamic routes for looking at other users' profiles
       { path: "profile/:userId", element: <FriendProfile /> },
       { path: '/frogfriends', element: <FriendsIndex /> },
       { path: '/thepond', element: <PostsIndex /> },
       { path: '/editprofile', element: <EditProfileDetails /> },
     ],
   },
-  //putting this here so it isn't blocked by the authenticate to access app outlet context
   {
     path: '/register', element: <Register />,
   },

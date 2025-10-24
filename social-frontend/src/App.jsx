@@ -15,7 +15,7 @@ function App() {
   const [error, setError] = useState()
   const apiUrl = import.meta.env.VITE_API_LINK;
 
-  //if there's a jwt token, grab it when page loads
+  //get jwt token
   useEffect(() => {
       const token = localStorage.getItem('jwtToken'); // Or wherever your token is stored
 
@@ -28,8 +28,7 @@ function App() {
       }
   }, []);
 
-  //Fetch details about current user to be used throughout app
-  //run when user logs in
+  // Fetch details about current user when logged in
   useEffect(() => {
         const token = localStorage.getItem('jwtToken');
 
@@ -55,7 +54,7 @@ function App() {
         .catch((error) => setError(error))
   }, [authenticated]);
 
-  //GET FRIEND REQUESTS PUT ON NAVBAR
+  //Fetch incoming friend requests
   useEffect(() => {
         const token = localStorage.getItem('jwtToken');
 
