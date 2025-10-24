@@ -46,6 +46,7 @@ export default function SignUpForm() {
 
     return (
         <div className="registration-section">
+            <h1>frogbook</h1>
             <h2>Register:</h2>
             <ul className="errors-list">
             {errArray && errArray.map((error, index) =>(

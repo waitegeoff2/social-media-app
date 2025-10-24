@@ -58,3 +58,7 @@
     border: 1px solid black;
     gap: 5px;
 }
+
+.delete-btn {
+  width: 100%;
+}

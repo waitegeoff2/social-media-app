@@ -5,7 +5,7 @@
     flex-direction: column;
     font-family: sans-serif;
     padding-top: 7vh;
-    
+    gap: 10px;
 }
 
 .form-outline {
@@ -23,5 +23,18 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.guest-block {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 3px;
+    border-radius: 5px;
+    background-color: rgb(124, 255, 109);;
+}
+
+.register-page-link {
+    color: blue;
 }
 

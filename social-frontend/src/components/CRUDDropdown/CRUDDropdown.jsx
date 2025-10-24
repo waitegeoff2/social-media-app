@@ -28,32 +28,33 @@ export default function CRUDDropDown({ currentPost }) {
     }, []);
 
     //when you accept or deny a friend request
-    async function handleDelete(senderId, requestId) {
+    async function handleDelete(postId) {
         // console.log(senderId)
         // //PUT THIS INTO THE REQ BODY BELOW AND UPDATE THE ROUTE TO USE IDS 
-        // const token = localStorage.getItem('jwtToken');
-        // console.log(token)
-        // try {
-        //     //if validation form returns true, continue with submission
-        //     await fetch(`${apiUrl}/contact/addfriend`, { 
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Authorization': `Bearer ${token}`
-        //     },
-        //     body: JSON.stringify({ senderId, requestId }), 
-        //     })
-        //     .then((response) => {
-        //         return response.json();
-        //     })
-        //     .then((response) => { 
-        //         console.log(response)
-        //         //goes back to app and rerenders page
-        //         navigate('/')
-        //     })
-        // } catch(error) {
-        //     console.log(error)
-        // }
+        const token = localStorage.getItem('jwtToken');
+        console.log(token)
+        try {
+            //if validation form returns true, continue with submission
+            await fetch(`${apiUrl}/posts/deletepost`, { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ postId }), 
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => { 
+                console.log(response)
+
+                //goes back to app and rerenders page
+                navigate('/')
+            })
+        } catch(error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -63,8 +64,7 @@ export default function CRUDDropDown({ currentPost }) {
             </div>
             {isOpen && (
                 <ul className="dropdown-menu">
-                    <li>EDIT POST</li>
-                    <li>DELETE POST</li>
+                    <button className="delete-btn" onClick={() => handleDelete(currentPost)}>Delete post.</button>
                 </ul>
             )}
         </div>

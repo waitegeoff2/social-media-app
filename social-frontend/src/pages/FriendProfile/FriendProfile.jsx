@@ -14,7 +14,7 @@ export default function FriendProfile() {
     const [error, setError] = useState('')
     const apiUrl = import.meta.env.VITE_API_LINK;
     const friendId = useParams()
-    const { currentUser } = useOutletContext()
+    const { currentUser, userFriends } = useOutletContext()
     console.log(currentUser)
 
     //USEEFFECT TO CHECK IF THIS USER IS YOUR FRIEND, set to true or false
@@ -28,7 +28,7 @@ export default function FriendProfile() {
         }
 
         console.log(isFriend)
-    }, [currentFriend]);
+    }, [currentFriend, userFriends]);
 
     //fetch details about THIS user's profile(for dynamic links) INCLUDING MESSAGES THEY'VE RECEIVED
     useEffect(() => {

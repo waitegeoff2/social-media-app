@@ -25,7 +25,7 @@ export default function NavBar({ authenticated, setAuthenticated, setCurrentUser
                     <div className="left-links">
                         <Link className='frog-link' to='/'><img className='frog-header-img' src={frogImg} alt="Image of a frog." /></Link>
                         <Link className='home-link' to='/'> frogbook </Link>
-                        <Link className='nav-link' to='/frogfriends'> Friends </Link>
+                        <Link className='nav-link' to='/frogfriends'> Frogs (Friends) </Link>
                         <Link className='nav-link' to='/thepond'> The Pond </Link>
                         <ContactDropdown 
                         options={ incomingRequests }

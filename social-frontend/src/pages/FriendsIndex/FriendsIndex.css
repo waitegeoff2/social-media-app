@@ -21,6 +21,10 @@
     gap: 1vh;
 }
 
+.add-btn {
+    
+}
+
 .user-box {
     display: flex;
     align-items: center;
@@ -69,8 +73,7 @@
     width: 85%;
 }
 
-.user-info-box {
-    
+.user-info-box {  
     padding: 3px;
     border: 1px solid black;
     border-radius: 5px;

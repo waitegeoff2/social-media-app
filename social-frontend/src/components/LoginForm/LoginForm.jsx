@@ -43,8 +43,15 @@ export default function LoginForm({ setAuthenticated }) {
             });
     }
 
+    async function handleGuest() {
+        //set password and username to Guest credentials
+        setUserName('guestaccount@tester.com')
+        setPassword('GuestPasswordTime53')
+    }
+
     return (
     <div className="registration-section">
+        <h1>frogbook</h1>
         <div className="form-outline">
             <h2>Login:</h2>
             {errMessage && <span>{errMessage}</span>}
@@ -72,10 +79,13 @@ export default function LoginForm({ setAuthenticated }) {
                         required
                     />
                 </div>
-                <button className="submit-btn button-2000s" type="submit">Login</button>
+                <button className="submit-btn button-2000s" type="submit">LOGIN</button>
             </form>
-            <span>Not a member? <Link to ="/register">Register here.</Link></span>
-            <span>LOGIN AS GUEST</span>
+            <span><b>Not a member? </b><Link className="register-page-link" to ="/register">Register here.</Link></span>
+            <div className="guest-block">
+                <button onClick={handleGuest}>LOGIN AS GUEST</button>
+                <span><b>Click to check out frogbook as a guest.</b></span>
+            </div>
         </div>
     </div>
     )
