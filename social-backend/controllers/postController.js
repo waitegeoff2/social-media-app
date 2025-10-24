@@ -4,7 +4,8 @@ async function getWallPosts(req, res, next) {
     try {
         const userId = req.user.id;
         const posts = await db.getWallPosts(userId)
-        res.json(posts)
+        const maxId = await db.getMaxPostsId()
+        res.json({wallposts: posts, maxId: maxId })
     } catch(error){
         console.error(error);
         next(error);
@@ -41,7 +42,10 @@ async function createPost(req, res, next) {
         const receiverId = req.body.currentUser.id;
         const messageContent = req.body.statusContent;
         await db.createPost(senderId, receiverId, messageContent)
-        res.json('Post created.')
+        const maxId = await db.getMaxPostsId()
+        //after creating, send back wallposts so client can re-render
+        const wallPosts = await db.getWallPosts(receiverId)
+        res.json({ maxpostId: maxId, posts: wallPosts })
     } catch(error){
         console.error(error);
         next(error);
@@ -50,8 +54,8 @@ async function createPost(req, res, next) {
 
 async function deletePost(req, res, next) {
 try {
-        // const senderId = req.user.id;
-        // const receiverId = req.body.currentUser.id;
+        const userId = req.user.id;
+        
         // const messageContent = req.body.statusContent;
         // await db.createPost(senderId, receiverId, messageContent)
         // res.json('Post created.')

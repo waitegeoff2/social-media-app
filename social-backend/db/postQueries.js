@@ -31,6 +31,22 @@ async function getWallPosts(userId) {
     }
 }
 
+async function getMaxPostsId() {
+       try {
+        //finding messages where the RECEIVER is that user
+        const result = await prisma.post.aggregate({
+            _max: {
+                id: true,
+            },
+        });
+        const maxId = result._max.id;
+        console.log('Maximum Post ID:', maxId);
+        return maxId;
+    } catch (error) {
+        console.error("Couldn't find user:", error);
+    } 
+}
+
 async function getRecentPosts(userId) {
     try {
         //SEE IF THIS WORKS
@@ -147,6 +163,7 @@ async function createComment(userId, postId, content) {
 
 module.exports = {
     getWallPosts,
+    getMaxPostsId,
     getRecentPosts,
     getFriendWallPosts,
     createPost,

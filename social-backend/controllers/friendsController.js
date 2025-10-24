@@ -1,4 +1,5 @@
 const db = require('../db/friendsQueries')
+const userDb = require('../db/loginQueries')
 
 async function getUserFriends(req, res, next) {
     try {
@@ -71,7 +72,9 @@ async function addContact(req, res, next) {
         const requestId = req.body.requestId;
 
         await db.addContact(user1Id, user2Id, requestId)
-        res.json('Friend added.')
+        //get updated friends list and send back to re-render
+        const userinfo = await userDb.getUserDetails(user1Id)
+        res.json(userinfo)
     } catch (error) {
         next(error)
     } 

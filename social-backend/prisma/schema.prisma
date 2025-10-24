@@ -43,9 +43,9 @@ model Post {
   id    Int      @id @default(autoincrement())
   content  String
   //send a post (post on wall). Can send to own wall and be both
-  sender  User @relation("sender",fields: [senderId], references: [id])
+  sender  User @relation("sender",fields: [senderId], references: [id], onDelete: Cascade)
   senderId  Int
-  receiver  User @relation("receiver",fields: [receiverId], references: [id])
+  receiver  User @relation("receiver",fields: [receiverId], references: [id], onDelete: Cascade)
   receiverId  Int
   sendTime  DateTime  @default(now())
   comments   Comment[]
@@ -54,9 +54,9 @@ model Post {
 
 model Comment {
   id    Int      @id @default(autoincrement())
-  author    User   @relation(fields: [authorId], references: [id])
+  author    User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId    Int
-  post   Post    @relation(fields: [postId], references: [id])
+  post   Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId   Int
   // likes  Like[]
 
@@ -67,10 +67,10 @@ model Comment {
 model Like {
   id    Int      @id @default(autoincrement())
   //person who liked
-  author    User   @relation(fields: [authorId], references: [id])
+  author    User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId    Int
   //liking a post
-  postlike   Post    @relation(fields: [postId], references: [id])
+  postlike   Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId   Int
   //liking a comment
   // commentlike  Comment   @relation(fields: [commentId], references: [id])
