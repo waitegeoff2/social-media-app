@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Icon from '@mdi/react';
 import { mdiAccountSupervisor } from '@mdi/js';
 import ContactDropdown from '../../components/ContactDropdown/ContactDropdown'
+import frogImg from '../../assets/frog3.jpg'
 
 export default function NavBar({ authenticated, setAuthenticated, setCurrentUser, incomingRequests, setIncomingRequests }) {
 
@@ -22,7 +23,7 @@ export default function NavBar({ authenticated, setAuthenticated, setCurrentUser
             <div className="nav-bar">
                 <div className="nav-links">
                     <div className="left-links">
-                        {/* FROG FACE IMAGE (old school facebook) */}
+                        <Link className='frog-link' to='/'><img className='frog-header-img' src={frogImg} alt="Image of a frog." /></Link>
                         <Link className='home-link' to='/'> frogbook </Link>
                         <Link className='nav-link' to='/frogfriends'> Friends </Link>
                         <Link className='nav-link' to='/thepond'> The Pond </Link>

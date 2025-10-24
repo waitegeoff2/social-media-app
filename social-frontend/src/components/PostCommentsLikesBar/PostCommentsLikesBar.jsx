@@ -80,8 +80,10 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                 const newComments = [...userWallPosts]
                 if (newComments[postIndex].comments.length==0) {
                     const newId = 0;
+                    const name = currentUser.name;
                     const newCommentPost = {
                         id: newId,
+                        author: { name: name },
                         authorId: currentUser.id,
                         postId: postId,
                         content: commentContent,
@@ -111,7 +113,7 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
 
     }
 
-    console.log(userWallPosts)
+    console.log(comments)
     console.log(currentUser)
 
     return (
@@ -152,7 +154,7 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                     <div className="comment-display" key={comment.id}>
                         <div className="top-row">
                             {/* *********** */}
-                            <span className="message-context"><b>{currentUser.name} says:</b></span>
+                            <span className="message-context"><b>{comment.author.name} says:</b></span>
                         </div>
                         <div className="message-content">{comment.content}</div>
                     </div>

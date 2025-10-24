@@ -63,7 +63,7 @@ export default function SignUpForm() {
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
-                <label htmlFor="name">Username:</label>
+                <label htmlFor="name">Username (email):</label>
                 <input 
                     type="email"
                     id='username' 

@@ -65,6 +65,8 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
         }
     }
 
+    console.log(userWallPosts)
+
     return (
         <>
             <div className="user-wall">

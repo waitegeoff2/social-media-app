@@ -15,6 +15,16 @@
     z-index: 10;
 }
 
+.frog-header-img {
+    height: 11.5vh;
+    filter: contrast(90%);
+}
+
+.frog-link {
+    display: flex;
+    align-items: center;
+}
+
 .nav-title {
     color: rgb(237, 237, 237);
     text-shadow: 0 1px 0 #17202A, 0 2px 0 #17202A,

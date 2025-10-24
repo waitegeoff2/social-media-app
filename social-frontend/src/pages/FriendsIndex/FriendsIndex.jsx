@@ -119,21 +119,23 @@ export default function FriendsIndex() {
                     {suggestedUsers.map((user, index) => (
                         <div className="suggested-list-item" key={user.id}>
                         {/* display user's name unless it is current user */}
-                            {(user.id!==currentUser.id)  &&
+                            {(user.id!==currentUser.id)  && (
                                 <div key={user.id} className="user-info-box">
                                     <img className="display-picture" src={ user.profilepic === null ? frogimage : user.profilepic} alt="The chat recipient's profile picture" />                                
                                     <Link className='profile-link' to={`/profile/${user.id}`}> {user.name} </Link>
+                                    {(userFriends &&
+                                      currentUser &&
+                                      (user.id!==currentUser.id) &&
+                                      userFriends.some(friend => friend.id === user.id)) ?
+                                        <div><b>Your friend.</b></div>
+                                        :
+                                        <button onClick={() => handleBtnRequest(user.id)}>Add friend</button>
+                                    }
                                 </div>
-                            }
+                                // logic should go here because you've already taken out the current user
+                            )}
                             {/* display add button if NOT in user's friends list */}
-                            {(userFriends &&
-                            currentUser &&
-                            (user.id!==currentUser.id) &&
-                            userFriends.some(friend => friend.id === user.id)) ?
-                            <div><b>Your friend.</b></div>
-                            :
-                            <button onClick={() => handleBtnRequest(user.id)}>Add friend</button>
-                            }
+                            
                         </div>
                         
                     ))}
