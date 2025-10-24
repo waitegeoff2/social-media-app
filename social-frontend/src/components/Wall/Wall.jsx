@@ -24,7 +24,8 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser, max
                 return response.json();
             })
             .then((response) => { 
-                console.log(response)
+                console.log(response.maxpostId)
+                
                 //add a temporary id to the temporary state variable for instant render
                 //CAN MOVE THIS UP BEFORE API CALL
                 const newArray = [...userWallPosts] 
@@ -45,8 +46,9 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser, max
                 //     setStatusContent('')
                 // } else {
                 //     //biggest id is WRONG: get highest id from db
-                    const biggestId = maxPostId
-                    const newId = biggestId + 1            
+                    // const biggestId = response.maxpostId
+                    const newId = response.maxpostId
+                    console.log(newId)          
                     const newPost = {
                         id: newId,
                         senderId: currentUser.id,

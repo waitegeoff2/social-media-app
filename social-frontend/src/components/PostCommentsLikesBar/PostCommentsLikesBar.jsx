@@ -114,8 +114,6 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
 
     }
 
-    console.log(comments)
-    console.log(likes)
 
     return (
         <>
