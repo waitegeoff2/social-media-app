@@ -162,7 +162,6 @@ async function createComment(userId, postId, content) {
 }
 
 async function deletePost(postId) { 
-    let thisPost = postId
     
     try {
         await prisma.post.delete({
