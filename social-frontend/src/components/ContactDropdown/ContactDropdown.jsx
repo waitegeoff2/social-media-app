@@ -6,7 +6,7 @@ import Icon from '@mdi/react';
 import { mdiAccountSupervisor } from '@mdi/js';
 import ContactDropdown from '../../components/ContactDropdown/ContactDropdown'
 
-export default function DropDown({ options, onSelect, placeholder, incomingRequests, setIncomingRequests }) {
+export default function DropDown({ options, onSelect, placeholder, incomingRequests, setIncomingRequests, userFriends, setUserFriends }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const apiUrl = import.meta.env.VITE_API_LINK;
@@ -52,6 +52,7 @@ export default function DropDown({ options, onSelect, placeholder, incomingReque
                 const reqArray = [...incomingRequests]
                 reqArray.splice(index, 1) 
                 setIncomingRequests(reqArray)
+                setUserFriends(response.contacts)
             })
         } catch(error) {
             console.log(error)

@@ -5,7 +5,7 @@ import { mdiAccountSupervisor } from '@mdi/js';
 import ContactDropdown from '../../components/ContactDropdown/ContactDropdown'
 import frogImg from '../../assets/frog3.jpg'
 
-export default function NavBar({ authenticated, setAuthenticated, setCurrentUser, incomingRequests, setIncomingRequests }) {
+export default function NavBar({ authenticated, setAuthenticated, setCurrentUser, incomingRequests, setIncomingRequests, userFriends, setUserFriends }) {
 
     async function handleLogOut() {
         localStorage.removeItem("jwtToken")
@@ -33,6 +33,8 @@ export default function NavBar({ authenticated, setAuthenticated, setCurrentUser
                         placeholder="Select"
                         incomingRequests={incomingRequests}
                         setIncomingRequests={ setIncomingRequests }
+                        userFriends={userFriends}
+                        setUserFriends={setUserFriends}
                         />
                     </div>
                     <div className="main-title">

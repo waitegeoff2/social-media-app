@@ -57,40 +57,42 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
             })
             .then((response) => { 
                 console.log(response)
+                setUserWallPosts(response.posts)
+                setStatusContent('')
                 //add a temporary id to the temporary state variable for instant render
                 //CAN MOVE THIS UP BEFORE API CALL
-                const newArray = [...userWallPosts] 
-                //something in here is wrong
-                if(newArray.length==0) {
-                    const newId =0;
-                    const newPost = {
-                        id: newId,
-                        senderId: sender.id,
-                        receiverId: currentFriend.id,
-                        content: statusContent,
-                        sender: {name: sender.name},
-                        receiver: {name: currentFriend.name},
-                        likes: [],
-                        comments: [],
-                    }
-                    setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
-                    setStatusContent('')
-                } else {
-                    const biggestId = newArray[0].id
-                    const newId = biggestId + 1            
-                    const newPost = {
-                        id: newId,
-                        senderId: sender.id,
-                        receiverId: currentFriend.id,
-                        content: statusContent,
-                        sender: {name: sender.name},
-                        receiver: {name: currentFriend.name},
-                        likes: [],
-                        comments: [],
-                    }
-                    setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
-                    setStatusContent('')
-                }
+                // const newArray = [...userWallPosts] 
+                // //something in here is wrong
+                // if(newArray.length==0) {
+                //     const newId =0;
+                //     const newPost = {
+                //         id: newId,
+                //         senderId: sender.id,
+                //         receiverId: currentFriend.id,
+                //         content: statusContent,
+                //         sender: {name: sender.name},
+                //         receiver: {name: currentFriend.name},
+                //         likes: [],
+                //         comments: [],
+                //     }
+                //     setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
+                //     setStatusContent('')
+                // } else {
+                //     const biggestId = newArray[0].id
+                //     const newId = biggestId + 1            
+                //     const newPost = {
+                //         id: newId,
+                //         senderId: sender.id,
+                //         receiverId: currentFriend.id,
+                //         content: statusContent,
+                //         sender: {name: sender.name},
+                //         receiver: {name: currentFriend.name},
+                //         likes: [],
+                //         comments: [],
+                //     }
+                //     setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
+                //     setStatusContent('')
+                // }
             })
         } catch(error) {
             console.log(error)

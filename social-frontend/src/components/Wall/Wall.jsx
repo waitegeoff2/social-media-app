@@ -24,44 +24,24 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser, max
                 return response.json();
             })
             .then((response) => { 
-                console.log(response.maxpostId)
-                
-                //add a temporary id to the temporary state variable for instant render
-                //CAN MOVE THIS UP BEFORE API CALL
-                const newArray = [...userWallPosts] 
-                //check if there's anything in array first
-                // if(newArray.length==0) {
-                //     const newId = 0;
-                //     const newPost = {
-                //         id: newId,
-                //         senderId: currentUser.id,
-                //         receiverId: currentUser.id,
-                //         content: statusContent,
-                //         sender: {name: currentUser.name},
-                //         receiver: {name: currentUser.name},
-                //         likes: [],
-                //         comments: [],
-                //     }
-                //     setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
-                //     setStatusContent('')
-                // } else {
-                //     //biggest id is WRONG: get highest id from db
-                    // const biggestId = response.maxpostId
-                    const newId = response.maxpostId
-                    console.log(newId)          
-                    const newPost = {
-                        id: newId,
-                        senderId: currentUser.id,
-                        receiverId: currentUser.id,
-                        content: statusContent,
-                        sender: {name: currentUser.name},
-                        receiver: {name: currentUser.name},
-                        likes: [],
-                        comments: [],
-                    }
-                    setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
+                console.log(response)
+                    //should really just RERENDER HERE AND GET ACTUAL VALUES OF POST
+                    // const newId = response.maxpostId
+                    // console.log(newId)          
+                    // const newPost = {
+                    //     id: newId,
+                    //     senderId: currentUser.id,
+                    //     receiverId: currentUser.id,
+                    //     content: statusContent,
+                    //     sender: {name: currentUser.name},
+                    //     receiver: {name: currentUser.name},
+                    //     likes: [],
+                    //     comments: [],
+                    // }
+                    // setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
+                    // setStatusContent('')
+                    setUserWallPosts(response.posts)
                     setStatusContent('')
-                
             })
         } catch(error) {
             console.log(error)
