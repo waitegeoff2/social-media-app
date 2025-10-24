@@ -38,6 +38,7 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
             .then((response) => { 
                 console.log(response)
                 //temporary state variable for instant update. Add a fake like object to this wallpost (using its index)
+                //I prefer just sending back updated database and updating, but here's another way
                 const newLikes = [...userWallPosts]
                 //only allow one like to be added
                 if(newLikes[index].likes.some(like => like.authorId === currentUser.id)) {
@@ -76,6 +77,7 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                 console.log(response)
                 console.log('handle function WORKED')
                 //temporary comment state variable for instant update.
+                //I prefer just sending back updated json from db and updating, but here's another way
                 const newComments = [...userWallPosts]
                 if (newComments[postIndex].comments.length==0) {
                     const newId = 0;

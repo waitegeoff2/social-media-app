@@ -47,14 +47,14 @@ export default function SignUpForm() {
     return (
         <div className="registration-section">
             <h1>frogbook</h1>
-            <h2>Register:</h2>
             <ul className="errors-list">
             {errArray && errArray.map((error, index) =>(
                 <li key={index}>{error.msg}</li>
             ))}
             </ul>
             <form className="registration-form form-outline" onSubmit={handleSubmit}>
-                <label htmlFor="name">Full Name:</label>
+                <h2>Register:</h2>
+                <label htmlFor="name"><b>Full Name:</b></label>
                 <input 
                     type="text"
                     id='name' 
@@ -64,7 +64,7 @@ export default function SignUpForm() {
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
-                <label htmlFor="name">Username (email):</label>
+                <label htmlFor="name"><b>Username (email):</b></label>
                 <input 
                     type="email"
                     id='username' 
@@ -75,7 +75,7 @@ export default function SignUpForm() {
                     required
                 />
                 {/* AGE */}
-                <label htmlFor="name">Birthday:</label>
+                <label htmlFor="name"><b>Birthday:</b></label>
                 <input 
                     type='date'
                     id='birthday' 
@@ -85,7 +85,7 @@ export default function SignUpForm() {
                     onChange={(e) => setBirthday(e.target.value)}
                     required
                 />
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password"><b>Password:</b></label>
                 <input 
                     type="password"
                     id='password' 
@@ -95,7 +95,7 @@ export default function SignUpForm() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <label htmlFor="confirmPassword">Confirm Password:</label>
+                <label htmlFor="confirmPassword"><b>Confirm Password:</b></label>
                 <input 
                     type="password"
                     id='confirmpassword' 

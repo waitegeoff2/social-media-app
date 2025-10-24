@@ -19,9 +19,15 @@
     gap: 5px;
 }
 
+.form-section {
+    display: flex;
+    gap: 2px;
+}
+
 .registration-form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 5px;
 }
 
@@ -31,7 +37,7 @@
     border: 1px solid black;
     padding: 3px;
     border-radius: 5px;
-    background-color: rgb(124, 255, 109);;
+    background-color: #8cd595;
 }
 
 .register-page-link {

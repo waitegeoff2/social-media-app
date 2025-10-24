@@ -13,13 +13,11 @@ let fakeCurrentUser = {}
 export default function Profile() {
     //get user info and populate the user's wall when opening profile page
     const [userWallPosts, setUserWallPosts] = useState([])
-    //get max post id for instant rendering before pulling db
+    //don't think i need this anymore
     const [maxPostId, setMaxPostId] = useState(0)
     const { currentUser } = useOutletContext()
     const [error, setError] = useState('')
     const apiUrl = import.meta.env.VITE_API_LINK;
-
-    //fetch details about THIS user's profile(for dynamic links)
 
     //UPDATE: Fetch post that user has received and set wall posts
     useEffect(() => {
@@ -46,8 +44,6 @@ export default function Profile() {
         })
         .catch((error) => setError(error))
     }, []);
-
-    //GET THE REQUESTS THAT WERE SENT TO THE USER
 
     return (
         <>

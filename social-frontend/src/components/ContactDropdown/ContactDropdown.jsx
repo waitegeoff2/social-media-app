@@ -67,18 +67,18 @@ export default function DropDown({ options, onSelect, placeholder, incomingReque
             </button>
             {isOpen && (
                 <ul className="dropdown-menu">
-                {(options.length > 0) ? 
-                options.map((request, index) => (
-                    <li className="request-item" key={request.id}>
-                        <div className="sidebar-name"><b>Contact request from:</b> {request.requestfrom.name}</div>
-                        <button className="button-2000s" onClick={() => addContact(request.requestfrom.id, request.id, index)}>Accept</button>
-                        {/* ONCLICK: Delete request ADD THIS LATER */}
-                        <button className="button-2000s">Deny</button>
-                    </li>
-                ))
-                :
-                <div className="request-item">No requests.</div>
-            }
+                    {(options.length > 0) ? 
+                    options.map((request, index) => (
+                        <li className="request-item" key={request.id}>
+                            <div className="sidebar-name"><b>Contact request from:</b> {request.requestfrom.name}</div>
+                            <button className="button-2000s" onClick={() => addContact(request.requestfrom.id, request.id, index)}>Accept</button>
+                            {/* ONCLICK: Delete request ADD THIS LATER */}
+                            <button className="button-2000s">Deny</button>
+                        </li>
+                    ))
+                    :
+                    <div className="request-item">No friend requests right now.</div>
+                    }
                 </ul>
             )}
         </div>

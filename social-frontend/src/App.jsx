@@ -3,25 +3,17 @@ import './App.css'
 import { Outlet } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar';
 import LoginForm from './components/LoginForm/LoginForm';
-import { useNavigate } from 'react-router-dom';
-
 
 function App() {
-  //add the login page here on the top level???
   const [loading, setLoading] = useState(true)
   const [authenticated, setAuthenticated] = useState(false)
   //maybe put a blank version of the currentuser object so it doesn't struggle on initial render
   const [currentUser, setCurrentUser] = useState()
   const [userFriends, setUserFriends] = useState([])
   const [incomingRequests, setIncomingRequests] = useState([])
+  // TO DO: better error displays
   const [error, setError] = useState()
   const apiUrl = import.meta.env.VITE_API_LINK;
-  const navigate = useNavigate()
-
-  //for a GUEST PROFILE
-  const [isGuest, setIsGuest] = useState(false)
-   //if TRUE, make current user equal an identical object to current user but 
-    //with something you define, make a fake current user
 
   //if there's a jwt token, grab it when page loads
   useEffect(() => {
@@ -99,7 +91,6 @@ function App() {
       </>
       :
       <>
-        {/* <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} /> */}
         <LoginForm setAuthenticated={setAuthenticated} />
       </>
     }

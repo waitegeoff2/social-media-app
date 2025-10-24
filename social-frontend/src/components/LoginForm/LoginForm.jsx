@@ -84,9 +84,10 @@ export default function LoginForm({ setAuthenticated }) {
             <span><b>Not a member? </b><Link className="register-page-link" to ="/register">Register here.</Link></span>
             <div className="guest-block">
                 <button onClick={handleGuest}>LOGIN AS GUEST</button>
-                <span><b>Click to check out frogbook as a guest.</b></span>
+                <span><b>Click for guest credentials.</b></span>
             </div>
         </div>
+        <span>frogbook is your <b>only</b> frog-themed Facebook clone.</span>
     </div>
     )
 }
