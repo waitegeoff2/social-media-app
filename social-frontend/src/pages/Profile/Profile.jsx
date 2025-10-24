@@ -13,6 +13,8 @@ let fakeCurrentUser = {}
 export default function Profile() {
     //get user info and populate the user's wall when opening profile page
     const [userWallPosts, setUserWallPosts] = useState([])
+    //get max post id for instant rendering before pulling db
+    const [maxPostId, setMaxPostId] = useState(0)
     const { currentUser } = useOutletContext()
     const [error, setError] = useState('')
     const apiUrl = import.meta.env.VITE_API_LINK;
@@ -34,7 +36,9 @@ export default function Profile() {
             return response.json();
         })
         .then((response) => { 
-            setUserWallPosts(response)
+            setUserWallPosts(response.wallposts)
+            setMaxPostId(response.maxId)
+            //SET MAX ID
             // console.log(response.messagedetails.friendDetails)
             // setSelectedFriend(response.messagedetails.friendDetails)
             // setMessages(response.messagedetails.messageHistory)
@@ -50,7 +54,7 @@ export default function Profile() {
         {/* PROFILE INFO */}
         <div className="profile-body">
             <ProfileDetailsSidebar userWall={currentUser} />
-            <Wall userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser}/>
+            <Wall userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser} maxPostId={maxPostId}/>
         </div>
         </>
     )

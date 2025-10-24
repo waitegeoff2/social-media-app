@@ -20,7 +20,6 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
 
     async function handleLike(postId, index) {
         console.log(postId)
-        console.log(index)
         const token = localStorage.getItem('jwtToken');
 
         //add message to db
@@ -95,8 +94,10 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                 } else {
                     const biggestId = newComments[postIndex].comments[0].id
                     const newId = biggestId + 1 
+                    const name = currentUser.name;
                     const newCommentPost = {
                         id: newId,
+                        author: { name: name },
                         authorId: currentUser.id,
                         postId: postId,
                         content: commentContent,
@@ -114,7 +115,7 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
     }
 
     console.log(comments)
-    console.log(currentUser)
+    console.log(likes)
 
     return (
         <>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import './Wall.css'
 import PostCommentsLikesBar from "../PostCommentsLikesBar/PostCommentsLikesBar";
 
-export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
+export default function Wall({ userWallPosts, setUserWallPosts, currentUser, maxPostId }) {
     const [statusContent, setStatusContent] = useState('')
     const apiUrl = import.meta.env.VITE_API_LINK;
 
@@ -29,22 +29,23 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                 //CAN MOVE THIS UP BEFORE API CALL
                 const newArray = [...userWallPosts] 
                 //check if there's anything in array first
-                if(newArray.length==0) {
-                    const newId =0;
-                    const newPost = {
-                        id: newId,
-                        senderId: currentUser.id,
-                        receiverId: currentUser.id,
-                        content: statusContent,
-                        sender: {name: currentUser.name},
-                        receiver: {name: currentUser.name},
-                        likes: [],
-                        comments: [],
-                    }
-                    setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
-                    setStatusContent('')
-                } else {
-                    const biggestId = newArray[0].id
+                // if(newArray.length==0) {
+                //     const newId = 0;
+                //     const newPost = {
+                //         id: newId,
+                //         senderId: currentUser.id,
+                //         receiverId: currentUser.id,
+                //         content: statusContent,
+                //         sender: {name: currentUser.name},
+                //         receiver: {name: currentUser.name},
+                //         likes: [],
+                //         comments: [],
+                //     }
+                //     setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
+                //     setStatusContent('')
+                // } else {
+                //     //biggest id is WRONG: get highest id from db
+                    const biggestId = maxPostId
                     const newId = biggestId + 1            
                     const newPost = {
                         id: newId,
@@ -58,7 +59,7 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                     }
                     setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
                     setStatusContent('')
-                }
+                
             })
         } catch(error) {
             console.log(error)
