@@ -57,7 +57,7 @@ export default function PostsIndex() {
                         <div className="wallpost user-post post-index-post">
                             <div className="top-row">
                                 <span className="message-context"><Link className='profile-link' to={`/profile/${post.sender.id}`}><b>{post.sender.name}</b></Link> says:</span>
-                                <span>{post.sendTime}</span>
+                                <span>{post.sendTime.split('T')[0]}</span>
                             </div>
                             <div className="message-content">{post.content}</div>
                         </div>
@@ -70,7 +70,7 @@ export default function PostsIndex() {
                         <div className="wallpost sender-post post-index-post">
                             <div className="top-row">
                                 <span className="message-context"><Link className='profile-link' to={`/profile/${post.sender.id}`}><b>{post.sender.name}</b></Link> {' > '} <Link className='profile-link' to={`/profile/${post.receiver.id}`}><b>{post.receiver.name}</b> </Link>:</span>
-                                <span>{post.sendTime}</span>
+                                <span>{post.sendTime.split('T')[0]}</span>
                             </div>
                             <div className="message-content">{post.content}</div>
                         </div> 

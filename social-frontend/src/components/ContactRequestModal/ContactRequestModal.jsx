@@ -15,7 +15,7 @@ const ContactRequestModal = ({ isOpen, onClose, children }) => {
         justifyContent: 'center',
         zIndex: 1010,
       }}
-      onClick={onClose} // Close on overlay click
+      onClick={onClose} 
     >
       <div 
         style={{
@@ -25,7 +25,7 @@ const ContactRequestModal = ({ isOpen, onClose, children }) => {
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
           position: 'relative',
         }}
-        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+        onClick={(e) => e.stopPropagation()}
       >
         {children}
         <button 

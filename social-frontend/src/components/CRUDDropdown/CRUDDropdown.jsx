@@ -29,12 +29,9 @@ export default function CRUDDropDown({ currentPost }) {
 
     //when you accept or deny a friend request
     async function handleDelete(postId) {
-        // console.log(senderId)
-        // //PUT THIS INTO THE REQ BODY BELOW AND UPDATE THE ROUTE TO USE IDS 
         const token = localStorage.getItem('jwtToken');
-        console.log(token)
+
         try {
-            //if validation form returns true, continue with submission
             await fetch(`${apiUrl}/posts/deletepost`, { 
             method: 'POST',
             headers: {
@@ -48,8 +45,6 @@ export default function CRUDDropDown({ currentPost }) {
             })
             .then((response) => { 
                 console.log(response)
-
-                //goes back to app and rerenders page
                 navigate('/')
             })
         } catch(error) {

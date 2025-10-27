@@ -11,9 +11,9 @@
     width: 100vh; /* container width */
     height: 70vh; 
     overflow: auto; /* scroll when content goes outside borders */
-    border: 1px solid #ccc; /* Optional: Add a border for visual clarity */
+    border: 1px solid #ccc; 
     padding: 10px; 
-    background-color: rgb(230, 255, 230);
+    background-color: rgb(191, 241, 191);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -21,6 +21,11 @@
 }
 
 .post-index-block {
-    border-bottom: 1px solid grey;   
-    
+    border-bottom: 1px solid grey; 
+    background-color: rgb(230, 255, 230);
+    margin: 1px; 
+    padding: 10px; 
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px grey;
 }

@@ -14,6 +14,7 @@
     border-radius: 5px;
     gap: 1vh;
     background-color: rgb(177, 227, 177);
+    box-shadow: 3px 3px 3px grey;
 }
 
 .friends-list {
@@ -53,6 +54,7 @@
     padding: 5px;
     border-radius: 5px; 
     background-color: rgb(177, 227, 177);
+    box-shadow: 3px 3px 3px grey;
 }
 
 .suggested-friends-list {

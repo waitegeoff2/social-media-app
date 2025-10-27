@@ -29,8 +29,7 @@ export default function ProfileDetailsSidebar({ userWall }) {
                         <div className="info-list-heading"><b>Bio: </b></div>
                         <div className="info-list-info">{userWall.bio}</div>
                     </div>
-                    }
-                    
+                    }   
                 </div>
                 { userWall.id == currentUser.id &&
                 <Link className='edit-link' to='/editprofile'>Edit Profile</Link>

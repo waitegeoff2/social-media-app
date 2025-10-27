@@ -74,7 +74,6 @@ export default function SignUpForm() {
                     onChange={(e) => setUserName(e.target.value)}
                     required
                 />
-                {/* AGE */}
                 <label htmlFor="name"><b>Birthday:</b></label>
                 <input 
                     type='date'

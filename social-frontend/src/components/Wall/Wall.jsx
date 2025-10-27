@@ -2,7 +2,7 @@ import { useState } from "react";
 import './Wall.css'
 import PostCommentsLikesBar from "../PostCommentsLikesBar/PostCommentsLikesBar";
 
-export default function Wall({ userWallPosts, setUserWallPosts, currentUser, maxPostId }) {
+export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
     const [statusContent, setStatusContent] = useState('')
     const apiUrl = import.meta.env.VITE_API_LINK;
 
@@ -24,22 +24,6 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser, max
                 return response.json();
             })
             .then((response) => { 
-                console.log(response)
-                    //should really just RERENDER HERE AND GET ACTUAL VALUES OF POST
-                    // const newId = response.maxpostId
-                    // console.log(newId)          
-                    // const newPost = {
-                    //     id: newId,
-                    //     senderId: currentUser.id,
-                    //     receiverId: currentUser.id,
-                    //     content: statusContent,
-                    //     sender: {name: currentUser.name},
-                    //     receiver: {name: currentUser.name},
-                    //     likes: [],
-                    //     comments: [],
-                    // }
-                    // setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
-                    // setStatusContent('')
                 setUserWallPosts(response.posts)
                 setStatusContent('')
             })
@@ -76,7 +60,7 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser, max
                                 <div key={wallPost.id} className="wallpost user-post">
                                     <div className="top-row">
                                         <span className="message-context"><b>{wallPost.sender.name} says:</b></span>
-                                        <span>{wallPost.sendTime}</span>
+                                        <span>{wallPost.sendTime.split('T')[0]}</span>
                                     </div>
                                     <div className="message-content">{wallPost.content}</div>
                                 </div>
@@ -84,7 +68,7 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser, max
                                 <div key={wallPost.id} className="wallpost sender-post">
                                     <div className="top-row">
                                         <span className="message-context"><b>{wallPost.sender.name} {' > '} {wallPost.receiver.name}:</b></span>
-                                        <span>{wallPost.sendTime}</span>
+                                        <span>{wallPost.sendTime.split('T')[0]}</span>
                                     </div>
                                     <div className="message-content">{wallPost.content}</div>
                                 </div>          

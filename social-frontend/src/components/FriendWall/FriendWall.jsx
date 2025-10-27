@@ -133,7 +133,7 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
                                 <div key={wallPost.id} className="wallpost user-post">
                                     <div className="top-row">
                                         <span className="message-context"><b>{wallPost.sender.name} says:</b></span>
-                                        <span>{wallPost.sendTime}</span>
+                                        <span>{wallPost.sendTime.split('T')[0]}</span>
                                     </div>
                                     <div className="message-content">{wallPost.content}</div>
                                 </div>
@@ -141,7 +141,7 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
                                 <div key={wallPost.id} className="wallpost sender-post">
                                     <div className="top-row">
                                         <span className="message-context"><b>{wallPost.sender.name} {' > '} {wallPost.receiver.name}:</b></span>
-                                        <span>{wallPost.sendTime}</span>
+                                        <span>{wallPost.sendTime.split('T')[0]}</span>
                                     </div>
                                     <div className="message-content">{wallPost.content}</div>
                                 </div>          

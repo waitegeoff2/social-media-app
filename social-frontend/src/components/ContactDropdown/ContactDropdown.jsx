@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Icon from '@mdi/react';
 
 import { mdiAccountSupervisor } from '@mdi/js';
-import ContactDropdown from '../../components/ContactDropdown/ContactDropdown'
 
-export default function DropDown({ options, onSelect, placeholder, incomingRequests, setIncomingRequests, userFriends, setUserFriends }) {
+export default function DropDown({ options, onSelect, incomingRequests, setIncomingRequests, userFriends, setUserFriends }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const apiUrl = import.meta.env.VITE_API_LINK;
@@ -31,11 +30,10 @@ export default function DropDown({ options, onSelect, placeholder, incomingReque
     //when you accept or deny a friend request
     async function addContact(senderId, requestId, index) {
         console.log(senderId)
-        //PUT THIS INTO THE REQ BODY BELOW AND UPDATE THE ROUTE TO USE IDS 
+
         const token = localStorage.getItem('jwtToken');
         console.log(token)
         try {
-            //if validation form returns true, continue with submission
             await fetch(`${apiUrl}/friends/addfriend`, { 
             method: 'POST',
             headers: {
@@ -72,7 +70,7 @@ export default function DropDown({ options, onSelect, placeholder, incomingReque
                         <li className="request-item" key={request.id}>
                             <div className="sidebar-name"><b>Contact request from:</b> {request.requestfrom.name}</div>
                             <button className="button-2000s" onClick={() => addContact(request.requestfrom.id, request.id, index)}>Accept</button>
-                            {/* ONCLICK: Delete request ADD THIS LATER */}
+                            {/* ONCLICK: Delete request TO DO */}
                             <button className="button-2000s">Deny</button>
                         </li>
                     ))

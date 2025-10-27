@@ -15,9 +15,6 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
         setShowComments(!showComments); // Toggles the state
     };
 
-    //MAKE THIS A COMMENT-LIKE MODAL
-    //MOVE LIKE-COMMENT INPUTS AND LOGIC DOWN THERE TOO
-
     async function handleLike(postId, index) {
         console.log(postId)
         const token = localStorage.getItem('jwtToken');
@@ -42,7 +39,7 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                 const newLikes = [...userWallPosts]
                 //only allow one like to be added
                 if(newLikes[index].likes.some(like => like.authorId === currentUser.id)) {
-                    //or REMOVE THE LIKE HERE
+                    //or you can remove like here
                     console.log("can't add another like")
                     return;
                 } else {
@@ -156,7 +153,6 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                 {comments.map((comment) => (
                     <div className="comment-display" key={comment.id}>
                         <div className="top-row">
-                            {/* *********** */}
                             <span className="message-context"><b>{comment.author.name} says:</b></span>
                         </div>
                         <div className="message-content">{comment.content}</div>
