@@ -17,10 +17,10 @@
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    
+    gap: 20px;   
 }
 
-.post-index-post {
-    border-bottom: 1px solid grey;
+.post-index-block {
+    border-bottom: 1px solid grey;   
+    
 }

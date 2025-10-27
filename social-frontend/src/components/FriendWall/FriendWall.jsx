@@ -147,7 +147,7 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
                                 </div>          
                             }
                             <div className="comments-likes-section">
-                                <PostCommentsLikesBar comments={wallPost.comments} likes={wallPost.likes} postId={wallPost.id} postIndex={index} userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser}/>
+                                <PostCommentsLikesBar comments={wallPost.comments} likes={wallPost.likes} postId={wallPost.id} postIndex={index} userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser} receiverId={wallPost.receiverId}/>
                             </div>
                         </div>
                     ))}

@@ -6,7 +6,7 @@ import { mdiThumbUp } from '@mdi/js';
 import CRUDDropDown from "../CRUDDropdown/CRUDDropdown";
 
 
-export default function PostComments({ comments, likes, postId, postIndex, userWallPosts, setUserWallPosts, currentUser }) {
+export default function PostComments({ comments, likes, postId, postIndex, userWallPosts, setUserWallPosts, currentUser, receiverId }) {
     const [commentContent, setCommentContent] = useState('')
     const [showComments, setShowComments] = useState(false)
     const apiUrl = import.meta.env.VITE_API_LINK;
@@ -133,7 +133,9 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
             }
             <span onClick={() => handleLike(postId, postIndex)} className="like-comment">Like</span>
             <span onClick={changeComments} className="like-comment">Comments ({comments.length})</span>
+            {currentUser.id == receiverId &&
             <CRUDDropDown className='crud-dropdown' currentPost={postId}/>
+            }   
         </div>
         {showComments && 
         <div className="post-comments">

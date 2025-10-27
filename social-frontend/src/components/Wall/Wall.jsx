@@ -40,8 +40,8 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser, max
                     // }
                     // setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
                     // setStatusContent('')
-                    setUserWallPosts(response.posts)
-                    setStatusContent('')
+                setUserWallPosts(response.posts)
+                setStatusContent('')
             })
         } catch(error) {
             console.log(error)
@@ -90,7 +90,7 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser, max
                                 </div>          
                             }
                             <div className="comments-likes-section">
-                                <PostCommentsLikesBar comments={wallPost.comments} likes={wallPost.likes} postId={wallPost.id} postIndex={index} userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser}/>
+                                <PostCommentsLikesBar comments={wallPost.comments} likes={wallPost.likes} postId={wallPost.id} postIndex={index} userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser} receiverId={wallPost.receiverId}/>
                             </div>
                         </div>
                     ))}
