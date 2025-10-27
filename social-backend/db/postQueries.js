@@ -67,6 +67,9 @@ async function getRecentPosts(userId) {
                                     orderBy: {
                                         createdAt: 'desc',
                                     },
+                                    include: {
+                                        author: true,
+                                    },
                                 },
                                 likes: true,
                             },
