@@ -26,7 +26,6 @@ async function getRecentPosts(req, res, next) {
 
 async function getFriendWallPosts(req, res, next) {
     try {
-        //USER ID IS NOT JWT ANYMORE
         const userId = parseInt(req.params.friendId)
         const posts = await db.getWallPosts(userId)
         res.json(posts)

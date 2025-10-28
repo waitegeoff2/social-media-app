@@ -37,8 +37,7 @@ async function getFriendRequests(req, res, next) {
 async function sendRequest(req, res, next) {
     try {
         const senderId = req.user.id;
-        const user2email = req.body.contactEmail; //??????
-        //find user 2's id with their email
+        const user2email = req.body.contactEmail; 
         const receiverId = await db.findUserByEmail(user2email)
         
         //update both TOREQUEST AND FROMREQUEST
@@ -53,8 +52,7 @@ async function sendRequest(req, res, next) {
 async function sendRequestById(req, res, next) {
     try {
         const senderId = req.user.id;
-        const user2Id = req.body.userId; //??????
-        //find user 2's id with their email
+        const user2Id = req.body.userId; 
 
         //update both TOREQUEST AND FROMREQUEST
         await db.sendRequest(senderId, user2Id)

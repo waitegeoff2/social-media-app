@@ -43,25 +43,6 @@ async function uploadFile(req, res, next) {
     }
 }
 
-//OLD ONE
-// async function uploadFile(req, res, next) {
-//     try {
-//         console.log(req.file);
-//         const userId = req.user.id;
-//         //check that this works
-//         const filePath = `/uploads/${req.file.filename}`;
-//         console.trace(filePath)
-//         console.trace(userId)
-//         //ADD TO DB
-//         await db.uploadFile(userId, filePath)
-//         //so you can update your profile pic state
-//         res.json('Pic uploaded')
-//     } catch (error) {
-//         next(error)
-//     } 
-// }
-
-
 module.exports = {
     uploadFile,
 }

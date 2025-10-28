@@ -17,7 +17,6 @@ async function getWallPosts(userId) {
                     include: {
                         author: true,
                     },
-                    //GET THESE IN DESCENDING ORDER
                 },
                 likes: true,
             },
@@ -33,7 +32,6 @@ async function getWallPosts(userId) {
 
 async function getMaxPostsId() {
        try {
-        //finding messages where the RECEIVER is that user
         const result = await prisma.post.aggregate({
             _max: {
                 id: true,
@@ -49,7 +47,7 @@ async function getMaxPostsId() {
 
 async function getRecentPosts(userId) {
     try {
-        //SEE IF THIS WORKS
+        //going into user's contacts and taking recent posts
         const recentPosts = await prisma.user.findUnique({
             where: {
                 id: userId,
@@ -76,7 +74,7 @@ async function getRecentPosts(userId) {
                             orderBy: {
                                     sendTime: 'desc',
                             },
-                        }, // Include all messages received by this friend
+                        }, 
                     },
                 
             },
@@ -90,7 +88,7 @@ async function getRecentPosts(userId) {
 
 async function getFriendWallPosts(userId) {
     try {
-        //finding messages where the RECEIVER is that user
+        //finding messages where the receiver is the friend
         const wallPosts = await prisma.post.findMany({
             where: {
                 receiverId: userId,

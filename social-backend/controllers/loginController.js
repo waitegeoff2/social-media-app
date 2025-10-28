@@ -2,6 +2,7 @@ const db = require('../db/loginQueries')
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs")
 
+//add more as needed
 const emptyErr = "is required"
 const lengthErr = "must be between 1 and 50 characters."
 const emailErr = "must be formatted like an email."
