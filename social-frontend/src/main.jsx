@@ -21,10 +21,10 @@ const router = createBrowserRouter([
       //current users' profile page
       { path: '/profile', element: <Profile />, errorElement: <ErrorPage /> },
       //dynamic routes for looking at other users' profiles
-      { path: "profile/:userId", element: <FriendProfile /> },
-      { path: '/frogfriends', element: <FriendsIndex /> },
-      { path: '/thepond', element: <PostsIndex /> },
-      { path: '/editprofile', element: <EditProfileDetails /> },
+      { path: "profile/:userId", element: <FriendProfile />, errorElement: <ErrorPage /> },
+      { path: '/frogfriends', element: <FriendsIndex />, errorElement: <ErrorPage /> },
+      { path: '/thepond', element: <PostsIndex />, errorElement: <ErrorPage /> },
+      { path: '/editprofile', element: <EditProfileDetails />, errorElement: <ErrorPage /> },
     ],
   },
   {

@@ -5,6 +5,7 @@
     justify-self: center;
     align-items: center;
     padding: 5vh;
+    gap: 4px;
 }
 
 .posts-index-list-container {

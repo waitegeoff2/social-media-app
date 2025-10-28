@@ -1,7 +1,5 @@
 import './NavBar.css'
 import { Link } from 'react-router-dom'
-import Icon from '@mdi/react';
-import { mdiAccountSupervisor } from '@mdi/js';
 import ContactDropdown from '../../components/ContactDropdown/ContactDropdown'
 import frogImg from '../../assets/frog3.jpg'
 
@@ -16,7 +14,7 @@ export default function NavBar({ authenticated, setAuthenticated, setCurrentUser
 
     const handleDropDownSelect = (selectedValue) => {
         console.log(selectedValue);
-    };
+    }
 
     return (
         <>

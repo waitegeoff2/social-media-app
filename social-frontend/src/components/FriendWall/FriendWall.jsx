@@ -5,7 +5,6 @@ import { useOutletContext } from "react-router-dom";
 
 export default function FriendWall({ userWallPosts, setUserWallPosts, currentFriend, isFriend }) {
     //currentuserwall is the details of the user whose wall it is - receiver id
-    //UPDATE BELOW CODE
     const [statusContent, setStatusContent] = useState('')
     const apiUrl = import.meta.env.VITE_API_LINK;
     //the user (you) - the sender id
@@ -43,7 +42,6 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
 
         //add message to db
         try {
-            //ADD THIS TO BACKEND
             await fetch(`${apiUrl}/posts/createpost`, { 
             method: 'POST',
             headers: {
@@ -59,47 +57,11 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
                 console.log(response)
                 setUserWallPosts(response.posts)
                 setStatusContent('')
-                //add a temporary id to the temporary state variable for instant render
-                //CAN MOVE THIS UP BEFORE API CALL
-                // const newArray = [...userWallPosts] 
-                // //something in here is wrong
-                // if(newArray.length==0) {
-                //     const newId =0;
-                //     const newPost = {
-                //         id: newId,
-                //         senderId: sender.id,
-                //         receiverId: currentFriend.id,
-                //         content: statusContent,
-                //         sender: {name: sender.name},
-                //         receiver: {name: currentFriend.name},
-                //         likes: [],
-                //         comments: [],
-                //     }
-                //     setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
-                //     setStatusContent('')
-                // } else {
-                //     const biggestId = newArray[0].id
-                //     const newId = biggestId + 1            
-                //     const newPost = {
-                //         id: newId,
-                //         senderId: sender.id,
-                //         receiverId: currentFriend.id,
-                //         content: statusContent,
-                //         sender: {name: sender.name},
-                //         receiver: {name: currentFriend.name},
-                //         likes: [],
-                //         comments: [],
-                //     }
-                //     setUserWallPosts((prevUserWallPosts) => [newPost, ...prevUserWallPosts])
-                //     setStatusContent('')
-                // }
             })
         } catch(error) {
             console.log(error)
         }
     }
-
-    console.log(currentFriend)
 
     return (
         <>
@@ -115,10 +77,8 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
                                 value={statusContent}
                                 onChange={(e) => setStatusContent(e.target.value)}
                                 rows="2" //rows in text area
-
                             />
-                            
-                            <button className="msg-send-btn button-2000s" type="submit">Send Message</button>        
+                            <button className="msg-send-btn button-2000s" type="submit">Post to Pad</button>        
                     </form> 
                 </div>
                 :
@@ -128,7 +88,6 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
                 <div className="wall-feed">
                     { userWallPosts.map((wallPost, index) => (
                         <div key={wallPost.id} className="wallpost-item">
-                        {/* this display isn't working */}
                             { (wallPost.senderId==wallPost.receiverId) ?
                                 <div key={wallPost.id} className="wallpost user-post">
                                     <div className="top-row">

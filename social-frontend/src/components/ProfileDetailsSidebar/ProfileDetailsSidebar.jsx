@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
 
 export default function ProfileDetailsSidebar({ userWall }) {
-    const apiUrl = import.meta.env.VITE_API_LINK;
 
     const {currentUser} = useOutletContext()
 

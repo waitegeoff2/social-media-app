@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react"
 import "./ContactDropdown.css"
-import { useNavigate } from "react-router-dom";
 import Icon from '@mdi/react';
 
 import { mdiAccountSupervisor } from '@mdi/js';
@@ -9,7 +8,6 @@ export default function DropDown({ options, onSelect, incomingRequests, setIncom
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const apiUrl = import.meta.env.VITE_API_LINK;
-  const navigate = useNavigate();
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -47,6 +45,7 @@ export default function DropDown({ options, onSelect, incomingRequests, setIncom
             })
             .then((response) => { 
                 console.log(response)
+                //immediate state update
                 const reqArray = [...incomingRequests]
                 reqArray.splice(index, 1) 
                 setIncomingRequests(reqArray)

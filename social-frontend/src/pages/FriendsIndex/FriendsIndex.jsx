@@ -126,7 +126,7 @@ export default function FriendsIndex() {
                                       userFriends.some(friend => friend.id === user.id)) ?
                                         <div><b>Your friend.</b></div>
                                         :
-                                        <button onClick={() => handleBtnRequest(user.id)}>Add friend</button>
+                                        <button className="add-friend-btn" onClick={() => handleBtnRequest(user.id)}>Add friend</button>
                                     }
                                 </div>
                             )}                            
