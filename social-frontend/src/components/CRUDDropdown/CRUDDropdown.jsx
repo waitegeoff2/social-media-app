@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import './CRUDDropDown.css'
+import './CRUDDropdown.css'
 import { useNavigate } from "react-router-dom";
 
 export default function CRUDDropDown({ currentPost }) {
