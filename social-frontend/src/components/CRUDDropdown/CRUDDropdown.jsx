@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import "./CRUDDropDown.css"
+import './CRUDDropDown.css'
 import { useNavigate } from "react-router-dom";
 
 export default function CRUDDropDown({ currentPost }) {
@@ -27,7 +27,6 @@ export default function CRUDDropDown({ currentPost }) {
             };
     }, []);
 
-    //when you accept or deny a friend request
     async function handleDelete(postId) {
         const token = localStorage.getItem('jwtToken');
 
