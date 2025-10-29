@@ -68,7 +68,7 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
     return (
         <>
             <div className="user-wall">
-                <h2 className="wall-header">{currentFriend.name}'s Pad</h2>
+                <h2 className="wall-header">{currentFriend && currentFriend.name}'s Pad</h2>
                 {isFriend ? (
                 <div className="status-input">
                     <form className="send-form" onSubmit={handleSubmit}>
@@ -93,6 +93,7 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
                 {isFriend &&
                 <div className="wall-feed">
                     { userWallPosts && 
+                    currentUser &&
                     userWallPosts.map((wallPost, index) => (
                         <div key={wallPost.id} className="wallpost-item">
                             { (wallPost.senderId==wallPost.receiverId) ?

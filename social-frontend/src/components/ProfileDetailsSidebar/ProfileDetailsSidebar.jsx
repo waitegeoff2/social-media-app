@@ -1,4 +1,3 @@
-//sidebar for your profile to show pic/personal details, and a link to edit
 import frogimage from '../../assets/frogimg.jpg'
 import './ProfileDetailsSidebar.css'
 import { Link } from 'react-router-dom';
@@ -10,7 +9,8 @@ export default function ProfileDetailsSidebar({ userWall }) {
 
     return (
         <>
-        {userWall && 
+        {currentUser &&
+        userWall && 
         <div className="profile-sidebar">
             <div className="profile-pic">
                 <img className="profile-picture" src={ userWall.profilepic === null ? frogimage : userWall.profilepic} alt="The chat recipient's profile picture" />

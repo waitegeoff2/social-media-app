@@ -54,6 +54,7 @@ export default function Wall({ userWallPosts, setUserWallPosts, currentUser }) {
                 </div>
                 <div className="wall-feed">
                     { userWallPosts &&
+                    currentUser &&
                     userWallPosts.map((wallPost, index) => (
                         <div key={wallPost.id} className="wallpost-item">
                         {/* check if it's a self post and adjust the display */}

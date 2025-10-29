@@ -51,7 +51,8 @@ export default function PostsIndex() {
         <div className="posts-index-feed">
             <div className="posts-index-header"><h2>Recent posts from your frogs (friends):</h2></div>
             <div className="posts-index-list-container">
-            { indexPosts && 
+            { indexPosts &&
+            currentUser && 
             indexPosts.map((post, index) => (
                 (post.receiverId==post.senderId) ?
                     <div  key={post.id} className="post-index-block">
