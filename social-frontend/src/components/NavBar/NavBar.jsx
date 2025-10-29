@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 import ContactDropdown from '../../components/ContactDropdown/ContactDropdown'
 import frogImg from '../../assets/frog3.jpg'
 
-export default function NavBar({ authenticated, setAuthenticated, setCurrentUser, incomingRequests, setIncomingRequests, userFriends, setUserFriends }) {
+export default function NavBar({ authenticated, setAuthenticated, setCurrentUser, incomingRequests, setIncomingRequests, userFriends, setUserFriends, setAppEnter }) {
 
     async function handleLogOut() {
         localStorage.removeItem("jwtToken")
         setAuthenticated(false)
+        setAppEnter(false)
         setCurrentUser()
         console.log('Logged out. Token removed.')
     }

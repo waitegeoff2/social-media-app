@@ -129,7 +129,7 @@ export default function FriendsIndex() {
                 <div className="suggested-friends-list-header"><h2>Frogs you may know</h2></div>
                 <div className="suggested-friends-list">
                     {suggestedUsers &&
-                    currentUser &&
+                    
                     suggestedUsers.map((user, index) => (
                         <div className="suggested-list-item" key={user.id}>
                             {(user.id!==currentUser.id)  && (

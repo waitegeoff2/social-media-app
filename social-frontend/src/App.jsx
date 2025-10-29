@@ -7,6 +7,8 @@ import LoginForm from './components/LoginForm/LoginForm';
 function App() {
   const [loading, setLoading] = useState(true)
   const [authenticated, setAuthenticated] = useState(false)
+  //only loads pages after details pulled from database
+  const [appEnter, setAppEnter] = useState(false)
   //maybe put a blank version of the currentuser object so it doesn't struggle on initial render
   const [currentUser, setCurrentUser] = useState()
   const [userFriends, setUserFriends] = useState([])
@@ -23,6 +25,7 @@ function App() {
         setAuthenticated(true);
         setLoading(false)
       } else {
+        setAuthenticated(false);
         setLoading(false)
       }
   }, []);
@@ -47,8 +50,8 @@ function App() {
         .then((response) => {
             setCurrentUser(response)
             setUserFriends(response.contacts)
-            setAuthenticated(false);
-            //if guest =true, set current user to guest???
+            //PUT THIS HERE to avoid going forward without a db response
+            setAppEnter(true)
         })
         .catch((error) => setError(error))
   }, [authenticated]);
@@ -82,9 +85,9 @@ function App() {
     <div></div>
     :
     <>
-    { authenticated ?
+    { authenticated && appEnter ?
       <>
-        <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} setCurrentUser={setCurrentUser} incomingRequests={incomingRequests} setIncomingRequests={setIncomingRequests} userFriends={userFriends} setUserFriends={setUserFriends} />
+        <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} setCurrentUser={setCurrentUser} incomingRequests={incomingRequests} setIncomingRequests={setIncomingRequests} userFriends={userFriends} setUserFriends={setUserFriends} setAppEnter={setAppEnter} />
         <Outlet context={{ authenticated, setAuthenticated, currentUser, setCurrentUser, userFriends }}  />
       </>
       :
