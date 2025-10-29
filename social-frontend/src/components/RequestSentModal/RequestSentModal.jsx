@@ -1,4 +1,4 @@
-const ContactRequestModal = ({ isOpen, onClose, children }) => {
+const RequestSentModal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (
@@ -47,4 +47,4 @@ const ContactRequestModal = ({ isOpen, onClose, children }) => {
   );
 };
 
-export default ContactRequestModal;
+export default RequestSentModal;

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useOutletContext } from "react-router-dom";
 import ContactRequestModal from "../../components/ContactRequestModal/ContactRequestModal";
+import RequestSentModal from "../../components/RequestSentModal/RequestSentModal";
 import './FriendsIndex.css'
 import frogimage from '../../assets/frogimg.jpg'
 
@@ -12,13 +13,22 @@ export default function FriendsIndex() {
     const { currentUser, userFriends } = useOutletContext()
     //modal
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSentModalOpen, setIsSentModalOpen] = useState(false)
     const [contactEmail, setContactEmail] = useState('');
 
     function openModal() {
         setIsModalOpen(true)
     }
 
+    function openRequestModal() {
+        setIsSentModalOpen(true)
+    }
+
     const closeModal = () => setIsModalOpen(false);
+
+    function closeRequestModal() {
+        setIsSentModalOpen(false)
+    }
 
     //handle sending someone a contact request
     async function handleRequest(e){
@@ -60,7 +70,8 @@ export default function FriendsIndex() {
             .then((response) => {
                 return response.json();
             })
-            .then((response) => {   
+            .then((response) => { 
+                openRequestModal()  
                 console.log(response)
             })
         } catch(error) {
@@ -88,6 +99,8 @@ export default function FriendsIndex() {
         })
         .catch((error) => setError(error))
     }, []);
+
+    console.log(suggestedUsers)
 
     return (
         <>
@@ -155,6 +168,9 @@ export default function FriendsIndex() {
                 </form>
             </div>
         </ContactRequestModal>
+        <RequestSentModal isOpen={isSentModalOpen} onClose={closeRequestModal}>
+            <h2>Friend request sent!</h2>
+        </RequestSentModal>
         </>
     )
 }

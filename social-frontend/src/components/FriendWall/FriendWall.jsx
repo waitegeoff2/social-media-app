@@ -6,6 +6,7 @@ import { useOutletContext } from "react-router-dom";
 export default function FriendWall({ userWallPosts, setUserWallPosts, currentFriend, isFriend }) {
     //currentuserwall is the details of the user whose wall it is - receiver id
     const [statusContent, setStatusContent] = useState('')
+    const [requestSent, setRequestSent] = useState(false)
     const apiUrl = import.meta.env.VITE_API_LINK;
     //the user (you) - the sender id
     const { currentUser } = useOutletContext()
@@ -26,7 +27,8 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
             .then((response) => {
                 return response.json();
             })
-            .then((response) => {   
+            .then((response) => {  
+                setRequestSent(true) 
                 console.log(response)
             })
         } catch(error) {
@@ -67,7 +69,7 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
         <>
             <div className="user-wall">
                 <h2 className="wall-header">{currentFriend.name}'s Pad</h2>
-                {isFriend ? 
+                {isFriend ? (
                 <div className="status-input">
                     <form className="send-form" onSubmit={handleSubmit}>
                             <textarea
@@ -80,9 +82,13 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
                             />
                             <button className="msg-send-btn button-2000s" type="submit">Post to Pad</button>        
                     </form> 
-                </div>
+                </div> )
+                : (
+                requestSent ?
+                (<h2 className="request-span">Friend request sent.</h2>)
                 :
-                <button onClick={() => handleBtnRequest(currentFriend.id)} className="add-btn">Add {currentFriend.name} as friend.</button>
+                (<button onClick={() => handleBtnRequest(currentFriend.id)} className="add-btn">Add {currentFriend.name} as friend.</button>)
+                ) 
                 }
                 {isFriend &&
                 <div className="wall-feed">
