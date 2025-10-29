@@ -7,6 +7,7 @@ import './Profile.css'
 export default function Profile() {
     //get user info and populate the user's wall when opening profile page
     const [userWallPosts, setUserWallPosts] = useState([])
+    const [loading, setLoading] = useState(true)
     const { currentUser } = useOutletContext()
     const [error, setError] = useState('')
     const apiUrl = import.meta.env.VITE_API_LINK;
@@ -31,6 +32,7 @@ export default function Profile() {
         .then((response) => { 
             setUserWallPosts(response.wallposts)
             setMaxPostId(response.maxId)
+            setLoading(false)
             //SET MAX ID
             // console.log(response.messagedetails.friendDetails)
             // setSelectedFriend(response.messagedetails.friendDetails)
@@ -43,10 +45,14 @@ export default function Profile() {
     return (
         <>
         {/* PROFILE INFO */}
+        {loading ? 
+        <div></div>
+        :
         <div className="profile-body">
             <ProfileDetailsSidebar userWall={currentUser} />
             <Wall userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser} maxPostId={maxPostId}/>
         </div>
+        }
         </>
     )
 }

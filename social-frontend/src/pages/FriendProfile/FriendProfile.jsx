@@ -5,6 +5,7 @@ import ProfileDetailsSidebar from '../../components/ProfileDetailsSidebar/Profil
 import './FriendProfile.css'
 
 export default function FriendProfile() {
+    const [loading, setLoading] = useState(true)
     const [friendWallPosts, setFriendWallPosts] = useState([])
     const [currentFriend, setCurrentFriend] = useState('')
     const [isFriend, setIsFriend] = useState(false)
@@ -67,6 +68,7 @@ export default function FriendProfile() {
         })
         .then((response) => { 
             setFriendWallPosts(response)
+            setLoading(false)
         })
         .catch((error) => setError(error))
     }, []);
@@ -75,10 +77,14 @@ export default function FriendProfile() {
 
     return (
         <>
+        {loading ? 
+        <div></div>
+        :
         <div className="profile-body">
             <ProfileDetailsSidebar userWall={currentFriend}  />
             <FriendWall userWallPosts={friendWallPosts} setUserWallPosts={setFriendWallPosts} currentFriend={currentFriend} isFriend={isFriend}/>
         </div>
+        }
         </>
     )
 }
