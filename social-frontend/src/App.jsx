@@ -23,7 +23,6 @@ function App() {
         setAuthenticated(true);
         setLoading(false)
       } else {
-        setAuthenticated(false);
         setLoading(false)
       }
   }, []);
@@ -48,7 +47,7 @@ function App() {
         .then((response) => {
             setCurrentUser(response)
             setUserFriends(response.contacts)
-
+            setAuthenticated(false);
             //if guest =true, set current user to guest???
         })
         .catch((error) => setError(error))
