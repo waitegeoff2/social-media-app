@@ -92,7 +92,8 @@ export default function FriendWall({ userWallPosts, setUserWallPosts, currentFri
                 }
                 {isFriend &&
                 <div className="wall-feed">
-                    { userWallPosts.map((wallPost, index) => (
+                    { userWallPosts && 
+                    userWallPosts.map((wallPost, index) => (
                         <div key={wallPost.id} className="wallpost-item">
                             { (wallPost.senderId==wallPost.receiverId) ?
                                 <div key={wallPost.id} className="wallpost user-post">
