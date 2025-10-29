@@ -8,7 +8,7 @@ export default function NavBar({ authenticated, setAuthenticated, setCurrentUser
     async function handleLogOut() {
         localStorage.removeItem("jwtToken")
         setAuthenticated(false)
-        setAppEnter(false)
+        // setAppEnter(false)
         setCurrentUser()
         console.log('Logged out. Token removed.')
     }

@@ -13,7 +13,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState()
   const [userFriends, setUserFriends] = useState([])
   const [incomingRequests, setIncomingRequests] = useState([])
-  // TO DO: better error displays
   const [error, setError] = useState()
   const apiUrl = import.meta.env.VITE_API_LINK;
 
@@ -51,7 +50,7 @@ function App() {
             setCurrentUser(response)
             setUserFriends(response.contacts)
             //PUT THIS HERE to avoid going forward without a db response
-            setAppEnter(true)
+            // setAppEnter(true)
         })
         .catch((error) => setError(error))
   }, [authenticated]);
@@ -85,7 +84,7 @@ function App() {
     <div></div>
     :
     <>
-    { authenticated && appEnter ?
+    { authenticated ?
       <>
         <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} setCurrentUser={setCurrentUser} incomingRequests={incomingRequests} setIncomingRequests={setIncomingRequests} userFriends={userFriends} setUserFriends={setUserFriends} setAppEnter={setAppEnter} />
         <Outlet context={{ authenticated, setAuthenticated, currentUser, setCurrentUser, userFriends }}  />
