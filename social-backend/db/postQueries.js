@@ -103,7 +103,6 @@ async function getFriendWallPosts(userId) {
                     include: {
                         author: true,
                     },
-                    //GET THESE IN DESCENDING ORDER
                 },
                 likes: true,
             },
@@ -132,7 +131,6 @@ async function createPost(senderId, receiverId, messageContent) {
 }
 
 async function createLike(userId, postId) {
-        //probably not a necessary line
         let thisPost = postId
     try {
         await prisma.like.create({
@@ -143,6 +141,20 @@ async function createLike(userId, postId) {
         })
     } catch (error) {
         console.error("Couldn't like post:", error);
+    }
+}
+
+async function deleteLike(userId, postId) {
+        let thisPost = postId
+    try {
+        await prisma.like.deleteMany({
+            where: {
+              authorId: userId,
+              postId: thisPost,
+            }
+        })
+    } catch (error) {
+        console.error("Couldn't delete post:", error);
     }
 }
 
@@ -182,6 +194,7 @@ module.exports = {
     getFriendWallPosts,
     createPost,
     createLike,
+    deleteLike,
     createComment,
     deletePost,
 }

@@ -75,6 +75,18 @@ async function createLike(req, res, next) {
     }
 }
 
+async function deleteLike(req, res, next) {
+    try {
+        const userId = req.user.id;
+        const postId = req.body.postId;
+        const newLikes = await db.deleteLike(userId, postId)
+        res.json('Like deleted.')
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+}
+
 async function createComment(req, res, next) {
     try {
         const userId = req.user.id;
@@ -95,5 +107,6 @@ module.exports = {
     createPost,
     deletePost,
     createLike,
+    deleteLike,
     createComment
 }
