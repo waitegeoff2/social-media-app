@@ -15,6 +15,42 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
         setShowComments(!showComments); // Toggles the state
     };
 
+    async function deleteLike(postId, index) {
+        const token = localStorage.getItem('jwtToken');
+
+                //add message to db
+        try {
+            await fetch(`${apiUrl}/posts/deletelike`, { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ postId }), 
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => { 
+                console.log(response)
+                //temporary state variable for instant update. Add a fake like object to this wallpost (using its index)
+                //I prefer just sending back updated database and updating, but here's another way
+                const newLikes = [...userWallPosts]
+                const idToDelete = currentUser.id;
+                const indexToDelete = newLikes[index].likes.findIndex(like => like.authorId === idToDelete)
+                console.log(indexToDelete)
+                if (indexToDelete !== -1) {
+                    newLikes[index].likes.splice(indexToDelete, 1); // Remove 1 element at the found index
+                }
+                console.log(newLikes)
+                setUserWallPosts(newLikes)
+
+            })
+        } catch(error) {
+            console.log(error)
+        }
+    }
+
     async function handleLike(postId, index) {
         console.log(postId)
         const token = localStorage.getItem('jwtToken');
@@ -39,7 +75,7 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                 const newLikes = [...userWallPosts]
                 //only allow one like to be added
                 if(newLikes[index].likes.some(like => like.authorId === currentUser.id)) {
-                    //or you can remove like here
+                    deleteLike(postId, index)
                     console.log("can't add another like")
                     return;
                 } else {
@@ -144,7 +180,7 @@ export default function PostComments({ comments, likes, postId, postIndex, userW
                         name="statusContent"
                         value={commentContent}
                         onChange={(e) => setCommentContent(e.target.value)}
-                        rows="2" //rows in text area
+                        rows="4" //rows in text area
                     />
                     <button className="comment-btn button-2000s" type="submit">Add comment</button>
                 </form>

@@ -7,8 +7,6 @@ import LoginForm from './components/LoginForm/LoginForm';
 function App() {
   const [loading, setLoading] = useState(true)
   const [authenticated, setAuthenticated] = useState(false)
-  //only loads pages after details pulled from database
-  const [appEnter, setAppEnter] = useState(false)
   //maybe put a blank version of the currentuser object so it doesn't struggle on initial render
   const [currentUser, setCurrentUser] = useState()
   const [userFriends, setUserFriends] = useState([])
@@ -84,9 +82,12 @@ function App() {
     <div></div>
     :
     <>
-    { authenticated ?
+    { authenticated
+    // add currentuser here too to make sure you can't enter app without pulling that data
+    // && currentUser 
+    ?
       <>
-        <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} setCurrentUser={setCurrentUser} incomingRequests={incomingRequests} setIncomingRequests={setIncomingRequests} userFriends={userFriends} setUserFriends={setUserFriends} setAppEnter={setAppEnter} />
+        <NavBar authenticated={authenticated} setAuthenticated={setAuthenticated} setCurrentUser={setCurrentUser} incomingRequests={incomingRequests} setIncomingRequests={setIncomingRequests} userFriends={userFriends} setUserFriends={setUserFriends} />
         <Outlet context={{ authenticated, setAuthenticated, currentUser, setCurrentUser, userFriends }}  />
       </>
       :

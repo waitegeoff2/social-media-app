@@ -1,0 +1,13 @@
+.right-sidebar {
+    width: 20%;
+    height: 80%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 1%;
+    box-shadow: 5px 5px 5px rgb(190, 190, 190);
+    border: 1px solid black;
+}
+
+.rightside-title {
+    font-size: 21px;
+}   

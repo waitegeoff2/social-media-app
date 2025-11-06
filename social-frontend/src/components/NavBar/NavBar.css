@@ -7,7 +7,8 @@
     align-items: center;
     color:black;
     /* background-color: rgb(170, 248, 251); */
-    background: rgb(112, 172, 112);
+    background: linear-gradient(to bottom, rgb(144, 208, 144), rgb(62, 128, 62));
+    /* background: rgb(112, 172, 112); */
     height: 12vh;
     padding-left: 10px;
     padding-right: 10px;

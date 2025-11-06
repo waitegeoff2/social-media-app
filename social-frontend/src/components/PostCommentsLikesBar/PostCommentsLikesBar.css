@@ -3,6 +3,30 @@
     align-items: center;
 }
 
+.post-comments {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.comment-form {
+    display: flex;
+    gap: 3px;
+}
+
 .comment-btn {
     
+}
+
+.comments-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.comment-display {
+    background-color: rgb(212, 212, 212);
+    border-radius: 8px;
+    padding: 1%;
+    width: auto;
 }

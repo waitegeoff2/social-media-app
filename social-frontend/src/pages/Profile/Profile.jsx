@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Outlet, useOutletContext } from 'react-router-dom'
 import Wall from '../../components/Wall/Wall'
 import ProfileDetailsSidebar from '../../components/ProfileDetailsSidebar/ProfileDetailsSidebar'
+import RightSideBar from '../../components/RightSideBar/RightSideBar'
 import './Profile.css'
 
 export default function Profile() {
@@ -51,6 +52,7 @@ export default function Profile() {
         <div className="profile-body">
             <ProfileDetailsSidebar userWall={currentUser} />
             <Wall userWallPosts={userWallPosts} setUserWallPosts={setUserWallPosts} currentUser={currentUser} maxPostId={maxPostId}/>
+            <RightSideBar />
         </div>
         }
         </>
