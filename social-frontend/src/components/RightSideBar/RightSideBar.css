@@ -10,4 +10,16 @@
 
 .rightside-title {
     font-size: 21px;
-}   
+} 
+
+.frogbook-intro-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.frogbook-small-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

@@ -9,6 +9,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 70vh;
+    overflow: auto;
     border: 1px solid black;
     padding: 5px;
     border-radius: 5px;
@@ -17,16 +19,23 @@
     box-shadow: 3px 3px 3px grey;
 }
 
+.posts-index-list-container {
+    width: 100vh; /* container width */
+    height: 70vh; 
+    overflow: auto; /* scroll when content goes outside borders */
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    background-color: rgb(191, 241, 191);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;   
+}
+
 .friends-list {
     display: flex;
     flex-direction: column;
     gap: 1vh;
-}
-
-.add-btn {
-}
-
-.add-friend-btn {
 }
 
 .user-box {
@@ -52,7 +61,8 @@
     flex-direction: column;
     gap: 5px;
     align-items: center; 
-    
+    height: 70vh;
+    overflow: auto;
     border: 1px solid black;
     padding: 5px;
     border-radius: 5px; 
@@ -63,26 +73,21 @@
 .suggested-friends-list {
     display: flex;
     flex-direction: column;
-    align-self: center;
     gap: 5px;
     /* align-items: center; */
 }
 
 .suggested-list-item {
-    display: flex;
     /* justify-content: space-between; */
+    display: flex;
     align-items: center;
-    align-self: center;
+    justify-content: center;
     gap: 10px;
-    /* padding: 3px;
-    border: 1px solid black;
-    border-radius: 5px;
-    width: 85%;
-    background-color: rgb(119, 174, 119); */
-    width: 85%;
+    width: 100%;
 }
 
-.user-info-box {  
+.user-info-box { 
+    display: flex; 
     padding: 3px;
     border: 1px solid black;
     border-radius: 5px;
